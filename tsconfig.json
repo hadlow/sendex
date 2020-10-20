@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "es2018",
+		"rootDir": "src",
+		"outDir": "lib",
+		"module": "commonjs",
+		"lib": ["es6", "es2015", "dom"],
+		"declaration": true,
+		// "strict": true,
+		"types": ["node"],
+		"esModuleInterop": true,
+		"resolveJsonModule": true
+	},
+	"exclude": ["node_modules", "**/__tests__/*", "coverage", "lib"]
+}

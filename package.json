@@ -1,0 +1,46 @@
+{
+  "name": "sendex",
+  "version": "0.1.0",
+  "description": "A lightweight API endpoint testing tool",
+  "main": "./bin/index.js",
+  "bin": {
+    "sendex": "./bin/index.js"
+  },
+  "scripts": {
+    "start": "npm run build && npm run local",
+    "create": "npm run build && npm run test",
+    "build": "tsc -p .",
+    "watch": "tsc -p . -w",
+    "local": "sudo npm i -g && sendex",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hadlow/sendex.git"
+  },
+  "keywords": [
+    "api",
+    "endpoint",
+    "rest",
+    "test"
+  ],
+  "author": "Billy Hadlow <me@billyhadlow.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hadlow/sendex/issues"
+  },
+  "homepage": "https://github.com/hadlow/sendex#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "commander": "^6.1.0",
+    "path": "^0.12.7",
+    "yaml": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.2",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}
