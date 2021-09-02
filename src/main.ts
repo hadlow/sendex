@@ -1,10 +1,10 @@
 import program from 'commander';
-import Command from './command';
-import Run from './run';
-import Init from './init';
-import Test from './test';
+import Command from './cli/command';
+import Run from './cli/run';
+import Init from './cli/init';
+import Test from './cli/test';
 
-class CLI
+class Main
 {
 	private commands: Command[] = [];
 	
@@ -23,9 +23,7 @@ class CLI
 	}
 }
 
-function main()
+;(async () =>
 {
-	let cli = new CLI();
-}
-
-main();
+    new Main();
+})();

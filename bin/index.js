@@ -2,4 +2,4 @@
 
 process.title = 'sendex';
 
-require('../lib/cli/cli.js');
+require('../lib/main.js');
