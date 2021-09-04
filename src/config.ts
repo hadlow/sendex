@@ -6,8 +6,8 @@ const defaultConfig = {
 
 export function config(property: string): any
 {
-	let file: File = new File('.sendex.yml');
-	let config = file.readYamlSync()['config'];
+	const file: File = new File('.sendex.yml');
+	const config = file.readYaml()['config'];
 
 	if(!config[property])
 		config[property] = defaultConfig[property];
@@ -17,7 +17,7 @@ export function config(property: string): any
 
 export function env(property: string): any
 {
-	let file: File = new File('.sendex.yml');
+	const file: File = new File('.sendex.yml');
 
-	return file.readYamlSync()['env'][property];
+	return file.readYaml()['env'][property];
 }

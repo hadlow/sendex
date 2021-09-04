@@ -4,5 +4,5 @@ export default interface IResponse
 	headers: object,
 	status: number,
 	statusText: string,
-	config: object
+	config: object,
 }

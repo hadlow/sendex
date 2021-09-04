@@ -38,14 +38,14 @@ export default class Init extends Command
 
 	private displaySuccess(): void
 	{
-		console.log(chalk.blue('Created sendex directory'));
+		console.log(chalk.green('Created sendex directory'));
 	}
 
 	private getFolderStructer(root: string): object
 	{
 		return {
 			[root]: {
-				"out": {},
+				"responses": {},
 				"requests": {},
 				"tests": {}
 			}

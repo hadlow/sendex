@@ -1,7 +1,8 @@
 import program from 'commander';
 import Command from './cli/command';
-import Run from './cli/run';
 import Init from './cli/init';
+import New from './cli/new';
+import Run from './cli/run';
 import Test from './cli/test';
 
 class Main
@@ -10,8 +11,9 @@ class Main
 	
 	constructor()
 	{
-		this.addCommand(new Run());
 		this.addCommand(new Init());
+		this.addCommand(new New()); 
+		this.addCommand(new Run()); 
 		this.addCommand(new Test());
 
 		program.parse(process.argv);

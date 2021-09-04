@@ -9,14 +9,14 @@ export default class Run extends Command
 	{
 		super();
 
-		this.addCommand('run <endpoint>', 'Make a request to an API');
-		this.addAction(this.action);
+		this.addCommand('run [method] [endpoint]', 'Make a request to an API');
+		this.addAction(this.action.bind(this));
     }
     
-    private action(endpoint: string): void
+    private action(method: string, endpoint: string): void
     {
-        let path = '../' + config('path') + '/requests/' + endpoint + '.yml';
-        let request = new Request(path);
+        const path = `./${config('path')}/requests/${method.toUpperCase()}-${endpoint}.yml`;
+        const request = new Request(path);
 
         request.execute();
     }

@@ -1,15 +1,15 @@
+/// <reference types="node" />
+import * as fs from 'fs';
 export default class File {
     private path;
     constructor(file: string);
     getPath(): string;
     exists(): boolean;
-    read(callback: any): void;
-    readSync(): string;
-    readYaml(callback: (any: any) => any): void;
-    readYamlSync(): object;
-    write(data: string, callback: (any: any) => any): void;
+    read(): string;
+    readYaml(): object;
+    write(data: string, callback: () => any): void;
     writeSync(data: string): any;
-    writeYaml(data: object, callback: (any: any) => any): void;
+    writeYaml(data: object, callback: () => any): void;
     writeYamlSync(data: object): any;
-    create(contents: any, callback: any): void;
+    create(contents: string | NodeJS.ArrayBufferView, callback: fs.NoParamCallback): void;
 }

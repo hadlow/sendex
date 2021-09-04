@@ -21,33 +21,17 @@ export default class File
 		return fs.existsSync(this.path);
 	}
 
-	public read(callback): void
-	{
-		return fs.readFile(this.path, {encoding: 'utf8'}, callback);
-	}
-
-	public readSync(): string
+	public read(): string
 	{
 		return fs.readFileSync(this.path, {encoding: 'utf8'});
 	}
 
-	public readYaml(callback: (any) => any): void
+	public readYaml(): object
 	{
-		return this.read((error, data) =>
-		{
-			if(error)
-				console.error(error);
-
-			callback(YAML.parse(data));
-		});
+		return YAML.parse(this.read());
 	}
 
-	public readYamlSync(): object
-	{
-		return YAML.parse(this.readSync());
-	}
-
-	public write(data: string, callback: (any) => any): void
+	public write(data: string, callback: () => any): void
 	{
 		return fs.writeFile(this.path, data, callback);
 	}
@@ -57,7 +41,7 @@ export default class File
 		return fs.writeFileSync(this.path, data);
 	}
 
-	public writeYaml(data: object, callback: (any) => any): void
+	public writeYaml(data: object, callback: () => any): void
 	{
 		return fs.writeFile(this.path, YAML.stringify(data), callback);
 	}
@@ -67,7 +51,7 @@ export default class File
 		return fs.writeFileSync(this.path, YAML.stringify(data));
 	}
 
-	public create(contents, callback)
+	public create(contents: string | NodeJS.ArrayBufferView, callback: fs.NoParamCallback)
 	{
 		fs.writeFile(this.path, contents, {}, callback);
 	}

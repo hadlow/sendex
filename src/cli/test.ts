@@ -11,7 +11,7 @@ export default class Test extends Command
 	{
 		super();
 
-		this.addCommand('test', 'Test an API enpoint');
+		this.addCommand('test [endpoint]', 'Test an API enpoint');
 	}
 
 	private action(path: string)
@@ -22,6 +22,6 @@ export default class Test extends Command
 
 		let file = new File(path);
 
-		this.tests = file.readSync();
+		this.tests = file.read();
 	}
 }

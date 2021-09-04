@@ -11,7 +11,8 @@ export class Request
 	{
 		let file: File = new File(path);
 		
-		this.request = this.map(file.readYamlSync());
+		// Map the YAML config to an object for axios
+		this.request = this.map(file.readYaml());
 	}
 
 	private map(request: object): object

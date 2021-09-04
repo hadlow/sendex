@@ -25,7 +25,7 @@ export default class Response
 
 	public save()
 	{
-		let file: File = new File(config('path') + '/out/request.txt');
+		let file: File = new File(config('path') + '/responses/request.txt');
 
 		let contents = JSON.stringify({
 			"Headers": this.headers,
