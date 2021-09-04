@@ -20,9 +20,9 @@ sendex init
 
 This command will create the .sendex.yml file, which contains the global configuration sendex, and an empty set of sendex folders that are used to keep each request, response and test. The directory stucture is as follows:
 
-- requests: This will store the config files for each requests. A typical config file will contain the path, method and headers for that request.
-- responses: Responses from each request will be stored here.
-- tests: sendex gives you the ability to write JavaScript tests for each request, those tests go here.
+- **requests**: This will store the config files for each requests. A typical config file will contain the path, method and headers for that request.
+- **responses**: Responses from each request will be stored here.
+- **tests**: sendex gives you the ability to write JavaScript tests for each request, those tests go here.
 
 To create your first request, use the following command:
 
