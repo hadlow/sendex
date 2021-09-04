@@ -3,7 +3,7 @@ import File from './file';
 import Response from './response';
 import { config } from './config';
 
-export class Request
+export default class Request
 {
 	private request: object;
 
@@ -20,9 +20,10 @@ export class Request
 		return {
 			method: request['method'],
 			baseURL: config('baseUrl'),
-			url: request['url'],
+			url: request['endpoint'],
 			data: request['body'],
 			headers: request['headers'],
+			params: request['params'],
 		};
 	}
 

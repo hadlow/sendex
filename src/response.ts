@@ -32,7 +32,7 @@ export default class Response
 			"Data": this.data,
 			"Status": this.status + ' ' + this.statusText,
 			"Config": this.config,
-		});
+		}, null, 4);
 
 		file.create(contents, () => {
 

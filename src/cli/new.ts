@@ -25,7 +25,7 @@ export default class New extends Command
 			console.log(chalk.red(`There was ${errors.length} problem${errors.length == 1 ? '' : 's'} creating that request:`));
 			
 			for(const error of errors)
-				console.log(` * ${error}`);
+				console.log(`  * ${error}`);
 
 			return;
 		}
@@ -35,17 +35,19 @@ export default class New extends Command
 
 		if(!configFile.exists())
 		{
-			// Make config file
+			// Make command configuration file
 			configFile.writeYamlSync({
 				"method": method.toUpperCase(),
-				"path": `/${endpoint}`,
+				"endpoint": `/${endpoint}`,
 				"params": [],
 				"body": "",
 				"headers": [],
 			});
-		}
 
-		console.log(chalk.green(`Created new request: ${method.toUpperCase()}-${endpoint}.yml`));
+			console.log(chalk.green(`Created new request: ${method.toUpperCase()}-${endpoint}.yml`));
+		} else {
+			console.log(chalk.red(`The command "${method.toUpperCase()} ${endpoint}" already exists.`));
+		}
 	}
 
 	private validate(method: string, endpoint: string): string[]
@@ -61,7 +63,7 @@ export default class New extends Command
 				errors.push(`The HTTP method "${method}" is not valid. See https://sendexapi.com/docs/methods for a list of available HTTP methods.`);
 		}
 
-		// Validate method
+		// Validate endpoint
 		if(endpoint === undefined)
 			errors.push(`Missing argument [endpoint].`);
 
