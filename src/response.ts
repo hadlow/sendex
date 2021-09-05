@@ -1,6 +1,7 @@
-import { config } from './config';
+import chalk from 'chalk';
 import File from './file';
 import IResponse from './interfaces/response.interface';
+import { config } from './config';
 
 export default class Response
 {
@@ -23,11 +24,15 @@ export default class Response
 		this.config = response.config;
 	}
 
-	public save()
+	public save(method: string, endpoint: string)
 	{
-		let file: File = new File(config('path') + '/responses/request.txt');
+		const d = new Date();
+		const date = `${d.getFullYear()}${("0" + (d.getMonth() + 1)).slice(-2)}${("0" + d.getDate()).slice(-2)}`;
+		const time = `${d.getHours()}${d.getMinutes()}${d.getSeconds()}`;
+		const datetime = `${date}_${time}`;
+		const file: File = new File(`${config('path')}/responses/${datetime}_${method.toUpperCase()}-${endpoint}.json`);
 
-		let contents = JSON.stringify({
+		const contents = JSON.stringify({
 			"Headers": this.headers,
 			"Data": this.data,
 			"Status": this.status + ' ' + this.statusText,
@@ -35,9 +40,7 @@ export default class Response
 		}, null, 4);
 
 		file.create(contents, () => {
-
+			console.log(chalk.green('File saved.'));
 		});
-
-		console.log('File saved.');
 	}
 }

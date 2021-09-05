@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import Command from './command';
 import File from '../file';
 import Request from '../request';
+import getRequestPath from '../helpers/getRequestPath';
 import { config } from '../config';
 
 export default class Run extends Command
@@ -29,14 +30,13 @@ export default class Run extends Command
 			return;
 		}
 
-        const path = `./${config('path')}/requests/${method.toUpperCase()}-${endpoint}.yml`;
-		const configFile: File = new File(path);
+		const configFile: File = new File(getRequestPath(method, endpoint));
 
 		if(!configFile.exists())
 		{
 			console.log(chalk.red(`The command "${method.toUpperCase()} ${endpoint}" does not exist.`));
 		} else {
-			const request = new Request(path);
+			const request = new Request(method, endpoint);
 
             request.execute();
 		}

@@ -1,15 +1,23 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 import File from './file';
 import Response from './response';
+import getRequestPath from './helpers/getRequestPath';
 import { config } from './config';
 
 export default class Request
 {
+	private method: string;
+
+	private endpoint: string;
+
 	private request: object;
 
-	constructor(path: string)
+	constructor(method: string, endpoint: string)
 	{
-		let file: File = new File(path);
+		this.method = method;
+		this.endpoint = endpoint;
+
+		const file: File = new File(getRequestPath(method, endpoint));
 		
 		// Map the YAML config to an object for axios
 		this.request = this.map(file.readYaml());
@@ -29,13 +37,11 @@ export default class Request
 
 	public execute()
 	{
-		console.log(this.request);
-		
 		axios(this.request).then((resp) =>
 		{
 			let response = new Response(resp);
 
-			response.save();
+			response.save(this.method, this.endpoint);
 		}).catch((error) =>
 		{
 			console.log(error)

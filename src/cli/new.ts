@@ -3,6 +3,7 @@ import * as path from 'path';
 import chalk from 'chalk';
 import Command from './command';
 import File from '../file';
+import getRequestPath from '../helpers/getRequestPath';
 import Methods from '../enums/methods.enum';
 import { config } from '../config';
 
@@ -30,8 +31,7 @@ export default class New extends Command
 			return;
 		}
 
-		const path = `./${config('path')}/requests/${method.toUpperCase()}-${endpoint}.yml`;
-		const configFile: File = new File(path);
+		const configFile: File = new File(getRequestPath(method, endpoint));
 
 		if(!configFile.exists())
 		{
