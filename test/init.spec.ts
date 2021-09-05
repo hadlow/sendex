@@ -1,13 +1,10 @@
 import "mocha";
 import assert from "assert";
+import Init from '../src/cli/init'
 
 describe('Init command test', () =>
 {
     it('create the config file', () => {
-        assert.equal(1 + 1, 2);
-    });
-    
-    it('should return 9', () => {
-        assert.equal(3 * 3, 9);
+        const init = new Init();
     });
 });

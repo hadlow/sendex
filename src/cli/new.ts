@@ -39,9 +39,12 @@ export default class New extends Command
 			configFile.writeYamlSync({
 				"method": method.toUpperCase(),
 				"endpoint": `/${endpoint}`,
-				"params": [],
+				"params": {},
 				"body": "",
-				"headers": [],
+				"headers": {
+					"Content-Type": "application/json",
+					"Accept": "application/json",
+				},
 			});
 
 			console.log(chalk.green(`Created new request: ${method.toUpperCase()}-${endpoint}.yml`));
