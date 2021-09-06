@@ -3,6 +3,7 @@ import Command from './cli/command';
 import Init from './cli/init';
 import New from './cli/new';
 import Run from './cli/run';
+import View from './cli/view';
 import Test from './cli/test';
 
 class Main
@@ -12,8 +13,9 @@ class Main
 	constructor()
 	{
 		this.addCommand(new Init());
-		this.addCommand(new New()); 
-		this.addCommand(new Run()); 
+		this.addCommand(new New());
+		this.addCommand(new Run());
+		this.addCommand(new View());
 		this.addCommand(new Test());
 
 		program.parse(process.argv);
