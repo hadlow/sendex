@@ -4,6 +4,7 @@ import Init from './cli/init';
 import New from './cli/new';
 import Run from './cli/run';
 import View from './cli/view';
+import Clean from './cli/clean';
 import Test from './cli/test';
 
 class Main
@@ -16,6 +17,7 @@ class Main
 		this.addCommand(new New());
 		this.addCommand(new Run());
 		this.addCommand(new View());
+		this.addCommand(new Clean());
 		this.addCommand(new Test());
 
 		program.parse(process.argv);

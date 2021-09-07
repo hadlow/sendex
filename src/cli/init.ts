@@ -1,8 +1,7 @@
-import * as fs from 'fs';
-import * as path from 'path';
 import chalk from 'chalk';
 import Command from './command';
 import File from '../file';
+import createFolderIfMissing from '../helpers/createFolderIfMissing';
 import { config } from '../config';
 
 export default class Init extends Command
@@ -58,18 +57,10 @@ export default class Init extends Command
 
 		for(let [folder, subfolders] of Object.entries(folders))
 		{
-			this.createFolderIfMissing(root + folder);
+			createFolderIfMissing(root + folder);
 
 			if(subfolders != {})
 				this.generateFolders(folder, subfolders);
 		}
-	}
-
-	private createFolderIfMissing(folder: string): void
-	{
-		const absPath = path.join(process.cwd(), folder);
-
-		if(!fs.existsSync(absPath))
-			fs.mkdirSync(absPath);
 	}
 }

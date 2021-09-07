@@ -50,9 +50,4 @@ export default class File
 	{
 		return fs.writeFileSync(this.path, YAML.stringify(data));
 	}
-
-	public create(contents: string | NodeJS.ArrayBufferView, callback: fs.NoParamCallback)
-	{
-		fs.writeFile(this.path, contents, {}, callback);
-	}
 }

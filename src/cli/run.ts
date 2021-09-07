@@ -4,7 +4,6 @@ import Command from './command';
 import File from '../file';
 import Request from '../request';
 import getRequestPath from '../helpers/getRequestPath';
-import { config } from '../config';
 
 export default class Run extends Command
 {

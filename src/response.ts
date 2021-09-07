@@ -39,9 +39,9 @@ export default class Response
 			"Config": this.config,
 		}, null, 4);
 
-		file.create(contents, () => {
-			this.displaySuccess(file.getPath());
-		});
+		file.writeSync(contents);
+
+		this.displaySuccess(file.getPath());
 	}
 
 	public displaySuccess(filename: string)
