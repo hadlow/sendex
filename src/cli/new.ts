@@ -31,6 +31,10 @@ export default class New extends Command
 			return;
 		}
 
+		// Remvoe slash at start of endpoint
+		while(endpoint.charAt(0) === '/')
+			endpoint = endpoint.substring(1);
+
 		const configFile: File = new File(getRequestPath(method, endpoint));
 
 		if(!configFile.exists())
