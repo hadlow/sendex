@@ -37,7 +37,9 @@ export default class Run extends Command
 		} else {
 			const request = new Request(method, endpoint);
 
-            request.execute();
+            request.execute((response) => {
+				response.save(method, endpoint);
+			});
 		}
     }
 

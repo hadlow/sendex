@@ -44,6 +44,11 @@ export default class Response
 		this.displaySuccess(file.getPath());
 	}
 
+	public print()
+	{
+		console.log(chalk.cyan('Status') + chalk.red(': ') + chalk.green(`${this.status} ${this.statusText}`));
+	}
+
 	public displaySuccess(filename: string)
 	{
 		console.log(chalk.cyan('Status') + chalk.red(': ') + chalk.green(`${this.status} ${this.statusText}`));

@@ -38,7 +38,9 @@ export default class Peek extends Command
 		} else {
 			const request = new Request(method, endpoint);
 
-            request.execute();
+            request.execute((response) => {
+				response.print();
+			});
 		}
     }
 

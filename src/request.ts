@@ -35,13 +35,13 @@ export default class Request
 		};
 	}
 
-	public execute()
+	public execute(callback: any)
 	{
 		axios(this.request).then((resp) =>
 		{
 			let response = new Response(resp);
 
-			response.save(this.method, this.endpoint);
+			callback(response);
 		}).catch((error) =>
 		{
 			console.log(error)
