@@ -11,7 +11,7 @@ export default class Run extends Command
 	{
 		super();
 
-		this.addCommand('run [method] [endpoint]', 'Execute a request');
+		this.addCommand('run [method] [endpoint]', 'Execute a request and save the response to a file');
 		this.addAction(this.action.bind(this));
     }
     

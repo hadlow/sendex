@@ -6,13 +6,13 @@ import Request from '../request';
 import getRequestPath from '../helpers/getRequestPath';
 import { config } from '../config';
 
-export default class View extends Command
+export default class Peek extends Command
 {
     constructor()
 	{
 		super();
 
-		this.addCommand('view [method] [endpoint]', 'Execute a request and view the response in the terminal');
+		this.addCommand('peek [method] [endpoint]', 'Execute a request and view the response in the terminal');
 		this.addAction(this.action.bind(this));
     }
     
