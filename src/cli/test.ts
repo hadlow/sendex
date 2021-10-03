@@ -11,7 +11,7 @@ export default class Test extends Command
 	{
 		super();
 
-		this.addCommand('test [endpoint]', 'Test an API enpoint');
+		this.addCommand('test [endpoint]', 'Test an API endpoint');
 	}
 
 	private action(path: string)
