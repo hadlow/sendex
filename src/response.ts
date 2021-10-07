@@ -41,17 +41,21 @@ export default class Response
 
 		file.writeSync(contents);
 
-		this.displaySuccess(file.getPath());
+		console.log(chalk.cyan('Status') + chalk.red(': ') + chalk.green(`${this.status} ${this.statusText}`));
+		console.log(`Response saved at ${chalk.underline(file.getPath())}`);
 	}
 
 	public print()
 	{
-		console.log(chalk.cyan('Status') + chalk.red(': ') + chalk.green(`${this.status} ${this.statusText}`));
-	}
+		const message = {
+			'Status': `${this.status} ${this.statusText}`,
+			'Headers': `${JSON.stringify(this.headers, null, 4)}`,
+			'Data': `${JSON.stringify(this.data, null, 4)}`,
+		}
 
-	public displaySuccess(filename: string)
-	{
-		console.log(chalk.cyan('Status') + chalk.red(': ') + chalk.green(`${this.status} ${this.statusText}`));
-		console.log(`Response saved at ${chalk.underline(filename)}`);
+		for(const label in message)
+		{
+			console.log(chalk.cyan(label) + chalk.red(': ') + chalk.green(`${message[label]}`));
+		}
 	}
 }
