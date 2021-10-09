@@ -30,14 +30,17 @@ export default class Response
 		const date = `${d.getFullYear()}${("0" + (d.getMonth() + 1)).slice(-2)}${("0" + d.getDate()).slice(-2)}`;
 		const time = `${("0" + d.getHours()).slice(-2)}${("0" + d.getMinutes()).slice(-2)}${("0" + d.getSeconds()).slice(-2)}`;
 		const datetime = `${date}_${time}`;
-		const file: File = new File(`${config('path')}/responses/${datetime}_${method.toUpperCase()}-${endpoint}.json`);
+		const file: File = new File(`${config('path')}/responses/${datetime}_${method.toUpperCase()}-${endpoint}.txt`);
 
-		const contents = JSON.stringify({
-			"Headers": this.headers,
-			"Data": this.data,
-			"Status": this.status + ' ' + this.statusText,
-			"Config": this.config,
-		}, null, 4);
+		const contents = `${method.toUpperCase()} /${endpoint}
+${this.status + ' ' + this.statusText}
+---
+Headers
+${JSON.stringify(this.headers, null, 4)}
+---
+Body
+${JSON.stringify(this.data, null, 4)}
+`
 
 		file.writeSync(contents);
 
