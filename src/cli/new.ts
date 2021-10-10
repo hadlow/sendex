@@ -31,7 +31,7 @@ export default class New extends Command
 			return;
 		}
 
-		// Remvoe slash at start of endpoint
+		// Remvoe slash at start of endpoint as it's optional
 		while(endpoint.charAt(0) === '/')
 			endpoint = endpoint.substring(1);
 
@@ -51,7 +51,7 @@ export default class New extends Command
 				},
 			});
 
-			console.log(chalk.green(`Created new request: ${method.toUpperCase()}-${endpoint}.yml`));
+			console.log(chalk.green(`Created new request: ${configFile.getPath()}`));
 		} else {
 			console.log(chalk.red(`The command "${method.toUpperCase()} ${endpoint}" already exists.`));
 		}
