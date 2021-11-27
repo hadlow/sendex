@@ -29,7 +29,7 @@ export default class Init extends Command
 						"baseUrl": "http://domain.com/"
 					}
 				});
-			} catch (e: Exception) {
+			} catch (e: any) {
 				console.log(chalk.red('Error creating config file'));
 			}
 
@@ -39,7 +39,7 @@ export default class Init extends Command
 
 				this.generateFolders('', folders);
 				console.log(chalk.green('Created sendex directory'));
-			} catch(e: Exception) {
+			} catch(e: any) {
 				console.log(chalk.red('Error creating _sendex folder'));
 			}
 
