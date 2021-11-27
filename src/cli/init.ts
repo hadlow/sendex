@@ -20,24 +20,33 @@ export default class Init extends Command
 
 		if(!configFile.exists())
 		{
-			// Make config file
-			configFile.writeYamlSync({
-				"config": {
-					"path": "_sendex",
-					"baseUrl": "http://domain.com/"
-				}
-			});
+			try
+			{
+				// Make config file
+				configFile.writeYamlSync({
+					"config": {
+						"path": "_sendex",
+						"baseUrl": "http://domain.com/"
+					}
+				});
+			} catch (e: Exception) {
+				console.log(chalk.red('Error creating config file'));
+			}
+
+			try
+			{
+				const folders = this.getFolderStructer(config('path'));
+
+				this.generateFolders('', folders);
+				console.log(chalk.green('Created sendex directory'));
+			} catch(e: Exception) {
+				console.log(chalk.red('Error creating _sendex folder'));
+			}
+
+			return;
 		}
 
-		const folders = this.getFolderStructer(config('path'));
-
-		this.generateFolders('', folders);
-		this.displaySuccess();
-	}
-
-	private displaySuccess(): void
-	{
-		console.log(chalk.green('Created sendex directory'));
+		console.log(chalk.blue('Sendex has already been initialized here'));
 	}
 
 	private getFolderStructer(root: string): object
