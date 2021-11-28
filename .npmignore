@@ -1,0 +1,4 @@
+.DS_Store
+/node_modules
+.sendex.yml
+/_sendex
