@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import * as YAML from 'yaml';
 import File from './file';
 import Response from './response';
 import getRequestPath from './helpers/getRequestPath';
@@ -20,7 +21,17 @@ export default class Request
 		const file: File = new File(getRequestPath(method, endpoint));
 		
 		// Map the YAML config to an object for axios
-		this.request = this.map(file.readYaml());
+		this.request = this.map(YAML.parse(this.parseEnv(file.read())));
+	}
+	
+	private parseEnv(contents: string): string
+	{
+		const regex = /\${(.*?)\}/gmi;
+		const matches = contents.match(regex);
+
+		console.log(matches);
+
+		return contents;
 	}
 
 	private map(request: object): object
