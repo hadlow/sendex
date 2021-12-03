@@ -3,3 +3,4 @@
 .sendex.yml
 /_sendex
 /lib
+.env
