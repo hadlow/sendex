@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import chalk from 'chalk';
 import * as YAML from 'yaml';
 import File from './file';
 import Response from './response';
@@ -19,9 +20,16 @@ export default class Request
 		this.endpoint = endpoint;
 
 		const file: File = new File(getRequestPath(method, endpoint));
-		
-		// Map the YAML config to an object for axios
-		this.request = this.map(YAML.parse(this.parseEnv(file.read())));
+		const withEnv = this.parseEnv(file.read());
+
+		try
+		{
+			const request = YAML.parse(withEnv);
+
+			this.request = this.map(request);
+		} catch (e) {
+			console.log(chalk.red("There was a YAML error in the file config. Please check."));
+		}
 	}
 	
 	private parseEnv(contents: string): string
@@ -29,7 +37,15 @@ export default class Request
 		const regex = /\${(.*?)\}/gmi;
 		const matches = contents.match(regex);
 
-		console.log(matches);
+		if(!process?.env) return contents;
+
+		for(const match of matches)
+		{
+			const envVar = match.slice(2, -1);
+
+			if(envVar in process.env)
+				contents = contents.replace(match, process.env[envVar]);
+		}
 
 		return contents;
 	}
