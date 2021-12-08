@@ -13,6 +13,8 @@ class Main
 	
 	constructor()
 	{
+		require('dotenv').config();
+
 		this.addCommand(new Init());
 		this.addCommand(new New());
 		this.addCommand(new Run());
