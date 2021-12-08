@@ -4,6 +4,7 @@ import * as YAML from 'yaml';
 import File from './file';
 import Response from './response';
 import getRequestPath from './helpers/getRequestPath';
+import parseEnv from './helpers/parseEnv';
 import { config } from './config';
 
 export default class Request
@@ -19,35 +20,26 @@ export default class Request
 		this.method = method;
 		this.endpoint = endpoint;
 
-		const file: File = new File(getRequestPath(method, endpoint));
-		const withEnv = this.parseEnv(file.read());
+		let file: File;
+		let request: object;
 
 		try
 		{
-			const request = YAML.parse(withEnv);
-
-			this.request = this.map(request);
-		} catch (e) {
-			console.log(chalk.red("There was a YAML error in the file config. Please check."));
+			file = new File(getRequestPath(method, endpoint));
+		} catch(e) {
+			console.log(chalk.red("There was an error reading that file"));
+			return;
 		}
-	}
-	
-	private parseEnv(contents: string): string
-	{
-		const regex = /\${(.*?)\}/gmi;
-		const matches = contents.match(regex);
 
-		if(!process?.env) return contents;
-
-		for(const match of matches)
+		try
 		{
-			const envVar = match.slice(2, -1);
-
-			if(envVar in process.env)
-				contents = contents.replace(match, process.env[envVar]);
+			request = YAML.parse(parseEnv(file.read()));
+		} catch(e) {
+			console.log(chalk.red("There was a YAML error in the file config. Please check."));
+			return;
 		}
 
-		return contents;
+		this.request = this.map(request);
 	}
 
 	private map(request: object): object

@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/hadlow/sendex/issues"
   },
-  "homepage": "https://github.com/hadlow/sendex#readme",
+  "homepage": "https://www.sendexapi.com",
   "dependencies": {
     "axios": "^0.21.1",
     "chalk": "^4.1.0",
