@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import File from './file';
 import IResponse from './interfaces/response.interface';
 import { config } from './config';
+import getRequestPath from './helpers/getRequestPath';
 
 export default class Response
 {
@@ -30,6 +31,7 @@ export default class Response
 		const date = `${d.getFullYear()}${("0" + (d.getMonth() + 1)).slice(-2)}${("0" + d.getDate()).slice(-2)}`;
 		const time = `${("0" + d.getHours()).slice(-2)}${("0" + d.getMinutes()).slice(-2)}${("0" + d.getSeconds()).slice(-2)}`;
 		const datetime = `${date}_${time}`;
+		endpoint = endpoint.replace('/', '-');
 		const file: File = new File(`${config('path')}/responses/${datetime}_${method.toUpperCase()}-${endpoint}.txt`);
 
 		const contents = `${method.toUpperCase()} /${endpoint}
