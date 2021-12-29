@@ -4,6 +4,7 @@ export default function parseEnv(contents: string): string
 	const matches = contents.match(regex);
 
 	if(!process?.env) return contents;
+	if(!matches) return contents;
 
 	for(const match of matches)
 	{

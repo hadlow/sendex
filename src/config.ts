@@ -5,6 +5,7 @@ import parseEnv from './helpers/parseEnv';
 
 const defaultConfig = {
 	path: '_sendex',
+	baseUrl: 'http://localhost/',
 }
 
 export function config(property: string): any
