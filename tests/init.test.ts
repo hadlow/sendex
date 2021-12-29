@@ -14,6 +14,5 @@ describe('Init command', () =>
 		} catch(e: Exception) {
 			expect(e).toMatch('error');
 		}
-
     });
 });
