@@ -35,7 +35,7 @@ export default class Init extends Command
 
 			try
 			{
-				const folders = this.getFolderStructer(config('path'));
+				const folders = this.getFolderStructure('_sendex');
 
 				this.generateFolders('', folders);
 				console.log(chalk.green('Created sendex directory'));
@@ -49,7 +49,7 @@ export default class Init extends Command
 		console.log(chalk.blue('Sendex has already been initialized here'));
 	}
 
-	private getFolderStructer(root: string): object
+	private getFolderStructure(root: string): object
 	{
 		return {
 			[root]: {
