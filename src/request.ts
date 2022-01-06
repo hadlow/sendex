@@ -63,7 +63,9 @@ export default class Request
 			callback(response);
 		}).catch((error) =>
 		{
-			console.log(error)
+			let response = new Response(error.response);
+
+			callback(response);
 		});
 	}
 }

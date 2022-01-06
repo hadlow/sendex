@@ -18,6 +18,12 @@ export default class Response
 
 	constructor(response: IResponse)
 	{
+		if(!response)
+		{
+			this.status = 999;
+			return;
+		}
+
 		this.data = response.data;
 		this.headers = response.headers;
 		this.status = response.status;
@@ -52,15 +58,35 @@ ${JSON.stringify(this.data, null, 4)}
 
 	public print()
 	{
-		const message = {
-			'Status': `${this.status} ${this.statusText}`,
-			'Headers': `${JSON.stringify(this.headers, null, 4)}`,
-			'Data': `${JSON.stringify(this.data, null, 4)}`,
+		if(this.status == 999)
+		{
+			console.log(chalk.red("Connection closed"));
+			return;
 		}
 
-		for(const label in message)
+		console.log(`${JSON.stringify(this.data, null, 4)}`);
+
+		let color = chalk.red;
+
+		switch(Math.floor(this.status / 100))
 		{
-			console.log(chalk.cyan(label) + chalk.red(': ') + chalk.green(`${message[label]}`));
+			case 2:
+				color = chalk.green;
+				break;
+
+			case 3:
+				color = chalk.cyan;
+				break;
+
+			case 4:
+				color = chalk.yellow;
+				break;
+
+			case 5:
+				color = chalk.red;
+				break;
 		}
+
+		console.log(color(`${this.status} ${this.statusText}`));
 	}
 }
