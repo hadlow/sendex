@@ -15,7 +15,7 @@ export default class Peek extends Command
 		this.addCommand('peek [method] [endpoint]', 'Execute a request and view the response in the terminal');
 		this.addAction(this.action.bind(this));
     }
-    
+
     private action(method: string, endpoint: string): void
     {
         const errors = this.validate(method, endpoint);
@@ -23,7 +23,7 @@ export default class Peek extends Command
         if(errors.length)
 		{
 			console.log(chalk.red(`There was ${errors.length} problem${errors.length == 1 ? '' : 's'} executing that request:`));
-			
+
 			for(const error of errors)
 				console.log(`  * ${error}`);
 

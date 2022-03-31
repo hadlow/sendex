@@ -20,7 +20,7 @@ export default class Response
 	{
 		if(!response)
 		{
-			this.status = 999;
+			this.status = -1;
 			return;
 		}
 
@@ -58,7 +58,7 @@ ${JSON.stringify(this.data, null, 4)}
 
 	public print()
 	{
-		if(this.status == 999)
+		if(this.status == -1)
 		{
 			console.log(chalk.red("Connection closed"));
 			return;

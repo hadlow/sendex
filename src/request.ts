@@ -5,6 +5,7 @@ import File from './file';
 import Response from './response';
 import getRequestPath from './helpers/getRequestPath';
 import parseEnv from './helpers/parseEnv';
+import localDns from './helpers/localDns';
 import { config } from './config';
 
 export default class Request
@@ -46,7 +47,7 @@ export default class Request
 	{
 		return {
 			method: request['method'],
-			baseURL: config('baseUrl'),
+			baseURL: localDns(config('baseUrl')),
 			url: request['endpoint'],
 			data: request['body'],
 			headers: request['headers'],
@@ -54,18 +55,15 @@ export default class Request
 		};
 	}
 
-	public execute(callback: any)
+	public execute(callback: (Response) => void)
 	{
-		axios(this.request).then((resp) =>
+		axios(this.request).then((response) =>
 		{
-			let response = new Response(resp);
-
-			callback(response);
+			callback(new Response(response));
 		}).catch((error) =>
 		{
-			let response = new Response(error.response);
-
-			callback(response);
+            console.log(error)
+			callback(new Response(error.response));
 		});
 	}
 }
