@@ -2,11 +2,11 @@
 
 The lightweight API tool
 
-## Create a new request with default template
+## Create a new request with default template
 
 `sendex new requests/get-blog.yml`
 
-## Run a request
+## Run a request
 
 `sendex run requests/post-user.yml`
 `sendex run requests/get-user.yml`
@@ -25,7 +25,7 @@ The lightweight API tool
 
 `sendex save requests/get-blog.yml`
 
-## Example config file
+## Example config file
 
 ```yaml
 args:
