@@ -1,23 +1,29 @@
 # Sendex
 
-The simple API tool
+The lightweight API tool
+
+## Create a new request with default template
+
+`sendex new requests/get-blog.yml`
 
 ## Run a request
 
-`sendex requests/post-user.yml`
-`sendex requests/get-user.yml`
-
-## Create a new request
-
-`sendex requests/get-blog.yml --create`
+`sendex run requests/post-user.yml`
+`sendex run requests/get-user.yml`
 
 ## Pass in args
 
-`sendex requests/get-blog.yml -- id:4371`
+`sendex run requests/get-blog.yml -- id=4371`
+
+## Show specific fields
+
+`sendex run requests/get-blog.yml -status`
+`sendex run requests/get-blog.yml -body`
+`sendex run requests/get-blog.yml -headers`
 
 ## Save response
 
-`sendex requests/get-blog.yml --save`
+`sendex save requests/get-blog.yml`
 
 ## Example config file
 
