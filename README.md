@@ -1,31 +1,41 @@
 # Sendex
 
-The lightweight API tool
+Sendex is a lightweight, file-based tool to make requests to your API
 
-## Create a new request with default template
+## Installation
+
+Coming soon
+
+## Usage
+
+### Create a new request with default template
 
 `sendex new requests/get-blog.yml`
 
-## Run a request
+### Create a new request with the post template
+
+`sendex new requests/post-user.yml --post`
+
+### Run a request
 
 `sendex run requests/post-user.yml`
 `sendex run requests/get-user.yml`
 
-## Pass in args
+### Pass in args
 
 `sendex run requests/get-blog.yml -- id=4371`
 
-## Show specific fields
+### Show specific fields
 
-`sendex run requests/get-blog.yml -status`
-`sendex run requests/get-blog.yml -body`
-`sendex run requests/get-blog.yml -headers`
+`sendex run requests/get-blog.yml --status`
+`sendex run requests/get-blog.yml --body`
+`sendex run requests/get-blog.yml --headers`
 
-## Save response
+### Save response
 
 `sendex save requests/get-blog.yml`
 
-## Example config file
+### Example config file
 
 ```yaml
 args:

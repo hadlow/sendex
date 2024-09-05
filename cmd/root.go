@@ -6,12 +6,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "sendex",
 	Short: "The lightweight API tool",
-	Long: `Sendex is a CLI tool for making requests to your
-API - like Postman, but lightweight and command-based.
+	Long: `Sendex is a CLI tool for making requests to your API - like
+Postman, but lightweight and command-based.
 
 Get started by running:
 sendex new requests/get-blog.yml`,
