@@ -1,0 +1,11 @@
+method: POST
+endpoint: http://jsonplaceholder.typicode.com/todos
+headers:
+  - Content-Type: application/json
+  - Accept: application/json
+body: |
+  {
+    "userId": 1,
+    "title": "delectus aut autem",
+    "completed": false
+  }
