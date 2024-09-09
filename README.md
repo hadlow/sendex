@@ -2,11 +2,11 @@
 
 Sendex is a lightweight, file-based tool to make requests to your API
 
-## Installation
+## Installation
 
 Coming soon
 
-## Usage
+## Usage
 
 ### Create a new request with default template
 
