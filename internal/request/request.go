@@ -1,4 +1,4 @@
-package core
+package request
 
 import (
 	"fmt"
@@ -8,6 +8,8 @@ import (
 	"strings"
 
 	"github.com/hadlow/sendex/config"
+	"github.com/hadlow/sendex/internal/display"
+	"github.com/hadlow/sendex/internal/file"
 )
 
 // get file contents, parse yaml, call endpoint, return raw response
@@ -16,15 +18,15 @@ func Run(path string) (*http.Response, error) {
 	contents, err := os.ReadFile(path)
 
 	if err != nil {
-		fmt.Println(err)
+		display.Error(err)
 		return nil, fmt.Errorf("error reading file")
 	}
 
 	// parse yaml into object
-	request, err := ParseYaml(contents)
+	request, err := file.ParseYaml(contents)
 
 	if err != nil {
-		fmt.Println(err)
+		display.Error(err)
 		return nil, fmt.Errorf("error parsing YAML")
 	}
 
@@ -32,7 +34,7 @@ func Run(path string) (*http.Response, error) {
 	response, err := execute(request)
 
 	if err != nil {
-		fmt.Println(err)
+		display.Error(err)
 		return nil, fmt.Errorf("error calling endpoint")
 	}
 

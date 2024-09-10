@@ -2,7 +2,7 @@ args:
   - id: 1 # specify 1 as default
 method: GET
 endpoint: http://localhost:8000/blog/{id} # we can use 'id' here
+asd
 headers:
   - Content-Type: application/json
   - Accept: application/json
-asd

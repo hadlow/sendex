@@ -1,7 +1,8 @@
-package core
+package file
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 
 	"gopkg.in/yaml.v3"
@@ -29,4 +30,8 @@ func ParseYaml(contents []byte) (config.RequestSchema, error) {
 	}
 
 	return request, nil
+}
+
+func Save(response *http.Response) error {
+	return nil
 }

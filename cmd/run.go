@@ -1,11 +1,12 @@
 package cmd
 
 import (
-	"log"
+	"os"
 
 	"github.com/spf13/cobra"
 
-	"github.com/hadlow/sendex/internal/core"
+	"github.com/hadlow/sendex/internal/display"
+	"github.com/hadlow/sendex/internal/request"
 )
 
 // runCmd represents the run command
@@ -17,13 +18,13 @@ var runCmd = &cobra.Command{
 	Args: cobra.MinimumNArgs(1),
 
 	Run: func(cmd *cobra.Command, args []string) {
-		response, err := core.Run(args[0])
+		response, err := request.Run(args[0])
 
 		if err != nil {
-			log.Fatal("Error: ", err)
+			os.Exit(1)
 		}
 
-		core.Display(response)
+		display.Response(response)
 	},
 }
 

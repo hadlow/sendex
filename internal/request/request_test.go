@@ -1,10 +1,8 @@
-package core
+package request
 
 import (
 	"net/http"
 	"testing"
-	// "github.com/google/go-cmp/cmp"
-	// "github.com/hadlow/sendex/config"
 )
 
 func TestExecute(t *testing.T) {

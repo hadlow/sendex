@@ -7,7 +7,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hadlow/sendex/config"
-	"github.com/hadlow/sendex/internal/core"
+	"github.com/hadlow/sendex/internal/file"
 )
 
 var newCmd = &cobra.Command{
@@ -26,7 +26,7 @@ var newCmd = &cobra.Command{
 			template = config.PostTemplate
 		}
 
-		err := core.NewWithTemplate(args[0], template)
+		err := file.NewWithTemplate(args[0], template)
 
 		if err != nil {
 			log.Fatal("Error: ", err)
