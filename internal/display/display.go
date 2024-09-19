@@ -6,9 +6,26 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/tidwall/pretty"
 )
+
+type DisplayConfig struct {
+	ShowStatus bool
+	ShowHead   bool
+	ShowBody   bool
+}
+
+func NewDisplayConfig(showStatus bool, showHead bool, showBody bool) *DisplayConfig {
+	c := DisplayConfig{
+		ShowStatus: showStatus,
+		ShowHead:   showHead,
+		ShowBody:   showBody,
+	}
+
+	return &c
+}
 
 var Reset = "\033[0m"
 var Red = "\033[31m"
@@ -38,11 +55,37 @@ func Warning(text string) {
 	fmt.Println(Yellow + text + Reset)
 }
 
+func HeaderItem(header string, value []string) {
+	fmt.Println(Cyan + header + Reset + ": " + strings.Join(value, ", "))
+}
+
 func YmlError() {
 
 }
 
-func Response(response *http.Response) error {
+func Response(response *http.Response, config *DisplayConfig) error {
+	if config.ShowStatus {
+		Status(response)
+	}
+
+	if config.ShowHead {
+		err := Head(response)
+		if err != nil {
+			return err
+		}
+	}
+
+	if config.ShowBody {
+		err := Body(response)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func Status(response *http.Response) {
 	if response.StatusCode < 200 {
 		Warning(response.Status)
 	}
@@ -62,7 +105,17 @@ func Response(response *http.Response) error {
 	if response.StatusCode >= 500 {
 		Error(errors.New(response.Status))
 	}
+}
 
+func Head(response *http.Response) error {
+	for header, value := range response.Header {
+		HeaderItem(header, value)
+	}
+
+	return nil
+}
+
+func Body(response *http.Response) error {
 	body, err := io.ReadAll(response.Body)
 
 	if err != nil {
