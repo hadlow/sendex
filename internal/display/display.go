@@ -40,7 +40,7 @@ func Plain(text string) {
 }
 
 func Error(err error) {
-	fmt.Fprintf(os.Stderr, Red+"error: %v\n"+Reset, err)
+	fmt.Fprintf(os.Stderr, Red+"%v\n"+Reset, err)
 }
 
 func Info(text string) {
@@ -98,7 +98,7 @@ func Status(response *http.Response) {
 		Warning(response.Status)
 	}
 
-	if response.StatusCode >= 400 && response.StatusCode < 400 {
+	if response.StatusCode >= 400 && response.StatusCode < 500 {
 		Error(errors.New(response.Status))
 	}
 
