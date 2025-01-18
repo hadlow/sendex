@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hadlow/sendex/internal/display"
+	"github.com/hadlow/sendex/internal/helpers"
 	"github.com/hadlow/sendex/internal/request"
 )
 
@@ -18,7 +19,14 @@ var runCmd = &cobra.Command{
 	Args: cobra.MinimumNArgs(1),
 
 	Run: func(cmd *cobra.Command, args []string) {
-		response, err := request.Run(args[0])
+		path := args[0]
+		argsMap, err := helpers.CreateArgsmap(args[1:])
+
+		if err != nil {
+			os.Exit(1)
+		}
+
+		response, err := request.Run(path, argsMap)
 
 		if err != nil {
 			os.Exit(1)

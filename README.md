@@ -23,7 +23,7 @@ Coming soon
 
 ### Pass in args
 
-`sendex run requests/get-blog.yml -- id=4371`
+`sendex run requests/get-blog.yml id=4371`
 
 ### Show specific fields
 
@@ -49,4 +49,7 @@ endpoint: http://localhost:8000/blog/{id} # we can use 'id' here
 headers:
   - Content-Type: application/json
   - Accept: application/json
+whitelist-headers: # only show these headers in the output
+  - Content-Type
+  - Etag
 ```

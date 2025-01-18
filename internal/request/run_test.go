@@ -3,10 +3,98 @@ package request
 import (
 	"net/http"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
+	"github.com/hadlow/sendex/config"
 )
 
 func TestExecute(t *testing.T) {
 
+}
+
+func TestCompileId5(t *testing.T) {
+	// Test with ID 5
+	var request = config.RequestSchema{
+		Args: []map[string]string{
+			{
+				"id": "1",
+			},
+		},
+		Method:   "GET",
+		Endpoint: "http://jsonplaceholder.typicode.com/todos/{id}",
+		Headers: []map[string]string{
+			{
+				"TestId": "{id}",
+			},
+		},
+	}
+
+	var expectedRequestId5 = config.RequestSchema{
+		Args: []map[string]string{
+			{
+				"id": "1",
+			},
+		},
+		Method:   "GET",
+		Endpoint: "http://jsonplaceholder.typicode.com/todos/5",
+		Headers: []map[string]string{
+			{
+				"TestId": "5",
+			},
+		},
+	}
+
+	requestId5, err := compile(request, map[string]string{"id": "5"})
+
+	if err != nil {
+		t.Fatalf("error compiling request")
+	}
+
+	if !cmp.Equal(requestId5, expectedRequestId5) {
+		t.Fatalf("requestId5 is not the same as expectedRequestId5")
+	}
+}
+
+func TestCompileDefaultArg(t *testing.T) {
+	var requestDefault = config.RequestSchema{
+		Args: []map[string]string{
+			{
+				"id": "1",
+			},
+		},
+		Method:   "GET",
+		Endpoint: "http://jsonplaceholder.typicode.com/todos/{id}",
+		Headers: []map[string]string{
+			{
+				"TestId": "{id}",
+			},
+		},
+	}
+
+	var expectedRequestId1 = config.RequestSchema{
+		Args: []map[string]string{
+			{
+				"id": "1",
+			},
+		},
+		Method:   "GET",
+		Endpoint: "http://jsonplaceholder.typicode.com/todos/5",
+		Headers: []map[string]string{
+			{
+				"TestId": "5",
+			},
+		},
+	}
+
+	requestId1, err := compile(requestDefault, map[string]string{"id": "5"})
+
+	if err != nil {
+		t.Fatalf("error compiling request")
+	}
+
+	if !cmp.Equal(requestId1, expectedRequestId1) {
+		t.Fatalf("requestId1 is not the same as expectedRequestId5")
+	}
 }
 
 func TestGetMethod(t *testing.T) {

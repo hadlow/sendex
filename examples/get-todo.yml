@@ -1,8 +1,11 @@
 args:
   - id: 1 # specify 1 as default
+  - user: 5
 method: GET
-# endpoint: http://jsonplaceholder.typicode.com/todos/{id} # we can use 'id' here
-endpoint: http://jsonplaceholder.typicode.com/todos/1 # we can use 'id' here
+endpoint: http://jsonplaceholder.typicode.com/todos/{id} # we can use 'id' here
 headers:
-  - Content-Type: application/json
-  - Accept: application/json
+  - Content-Type: application/json-{user}
+  - Accept: application/json-{id}
+whitelist-headers:
+  - Content-Type
+  - Etag
