@@ -4,8 +4,8 @@ args:
 method: GET
 endpoint: http://jsonplaceholder.typicode.com/todos/{id} # we can use 'id' here
 headers:
-  - Content-Type: application/json-{user}
-  - Accept: application/json-{id}
+  - Content-Type: application/json
+  - Accept: application/json
 whitelist-headers:
   - Content-Type
   - Etag

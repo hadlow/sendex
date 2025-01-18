@@ -6,12 +6,16 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"slices"
 	"strings"
 
 	"github.com/tidwall/pretty"
+
+	"github.com/hadlow/sendex/config"
 )
 
 type DisplayConfig struct {
+	Request    *config.RequestSchema
 	ShowStatus bool
 	ShowHead   bool
 	ShowBody   bool
@@ -69,7 +73,7 @@ func Response(response *http.Response, config *DisplayConfig) error {
 	}
 
 	if config.ShowHead {
-		err := Head(response)
+		err := Head(response, config.Request.WhitelistHeaders)
 		if err != nil {
 			return err
 		}
@@ -107,9 +111,11 @@ func Status(response *http.Response) {
 	}
 }
 
-func Head(response *http.Response) error {
+func Head(response *http.Response, whitelistHeaders []string) error {
 	for header, value := range response.Header {
-		HeaderItem(header, value)
+		if len(whitelistHeaders) == 0 || slices.Contains(whitelistHeaders, header) {
+			HeaderItem(header, value)
+		}
 	}
 
 	return nil

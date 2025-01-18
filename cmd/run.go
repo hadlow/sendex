@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/hadlow/sendex/internal/display"
+	"github.com/hadlow/sendex/internal/file"
 	"github.com/hadlow/sendex/internal/helpers"
 	"github.com/hadlow/sendex/internal/request"
 )
@@ -21,35 +22,39 @@ var runCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		path := args[0]
 		argsMap, err := helpers.CreateArgsmap(args[1:])
-
 		if err != nil {
 			os.Exit(1)
 		}
 
-		response, err := request.Run(path, argsMap)
-
+		req, err := file.Get(path)
 		if err != nil {
 			os.Exit(1)
 		}
 
-		config := display.NewDisplayConfig(true, true, true)
+		response, err := request.Run(*req, argsMap)
+		if err != nil {
+			os.Exit(1)
+		}
+
+		displayConfig := display.NewDisplayConfig(true, true, true)
+		displayConfig.Request = req
 
 		if s, _ := cmd.Flags().GetBool("status"); s {
-			config.ShowHead = false
-			config.ShowBody = false
+			displayConfig.ShowHead = false
+			displayConfig.ShowBody = false
 		}
 
 		if s, _ := cmd.Flags().GetBool("body"); s {
-			config.ShowStatus = false
-			config.ShowHead = false
+			displayConfig.ShowStatus = false
+			displayConfig.ShowHead = false
 		}
 
 		if s, _ := cmd.Flags().GetBool("head"); s {
-			config.ShowStatus = false
-			config.ShowBody = false
+			displayConfig.ShowStatus = false
+			displayConfig.ShowBody = false
 		}
 
-		display.Response(response, config)
+		display.Response(response, displayConfig)
 	},
 }
 
