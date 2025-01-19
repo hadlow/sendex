@@ -8,6 +8,8 @@ import (
 	"testing"
 
 	"github.com/tidwall/pretty"
+
+	"github.com/hadlow/sendex/config"
 )
 
 func captureStdout(f func()) string {
@@ -37,10 +39,11 @@ func TestResponse(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	config := NewDisplayConfig(true, true, true)
+	displayConfig := NewDisplayConfig(true, true, true)
+	displayConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Response(&response, config)
+		Response(&response, displayConfig)
 	})
 
 	if output != expectedOutput {
@@ -60,10 +63,11 @@ func TestResponseWithOnlyStatus(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	config := NewDisplayConfig(true, false, false)
+	displayConfig := NewDisplayConfig(true, false, false)
+	displayConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Response(&response, config)
+		Response(&response, displayConfig)
 	})
 
 	if output != expectedOutput {
@@ -83,10 +87,38 @@ func TestResponseWithOnlyHeaders(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	config := NewDisplayConfig(false, true, false)
+	displayConfig := NewDisplayConfig(false, true, false)
+	displayConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Response(&response, config)
+		Response(&response, displayConfig)
+	})
+
+	if output != expectedOutput {
+		t.Fatalf("Display headers output not correct")
+	}
+}
+
+func TestResponseWithWhitelistedHeaders(t *testing.T) {
+	expectedOutput := Cyan + "Content-Type" + Reset + ": application/json\n"
+
+	response := http.Response{
+		Status:     "200 OK",
+		StatusCode: 200,
+		Header: http.Header{
+			"Content-Type": []string{"application/json"},
+			"Etag":         []string{"123"},
+		},
+		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
+	}
+
+	displayConfig := NewDisplayConfig(false, true, false)
+	displayConfig.Request = &config.RequestSchema{
+		WhitelistHeaders: []string{"Content-Type"},
+	}
+
+	output := captureStdout(func() {
+		Response(&response, displayConfig)
 	})
 
 	if output != expectedOutput {
@@ -106,10 +138,11 @@ func TestResponseWithOnlyBody(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	config := NewDisplayConfig(false, false, true)
+	displayConfig := NewDisplayConfig(false, false, true)
+	displayConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Response(&response, config)
+		Response(&response, displayConfig)
 	})
 
 	if output != expectedOutput {

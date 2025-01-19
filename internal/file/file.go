@@ -11,13 +11,13 @@ import (
 	"github.com/hadlow/sendex/internal/display"
 )
 
-func Get(path string) (*config.RequestSchema, error) {
+func Get(path string) (config.RequestSchema, error) {
 	// get file contents
 	contents, err := os.ReadFile(path)
 
 	if err != nil {
 		display.Error(err)
-		return nil, fmt.Errorf("error reading file")
+		return config.RequestSchema{}, fmt.Errorf("error reading file")
 	}
 
 	// parse yaml into object
@@ -25,7 +25,7 @@ func Get(path string) (*config.RequestSchema, error) {
 
 	if err != nil {
 		display.Error(err)
-		return nil, fmt.Errorf("error parsing YAML")
+		return config.RequestSchema{}, fmt.Errorf("error parsing YAML")
 	}
 
 	return request, nil
@@ -41,16 +41,16 @@ func NewWithTemplate(path string, template []byte) error {
 	return err
 }
 
-func ParseYaml(contents []byte) (*config.RequestSchema, error) {
+func ParseYaml(contents []byte) (config.RequestSchema, error) {
 	var request config.RequestSchema
 
 	err := yaml.Unmarshal(contents, &request)
 
 	if err != nil {
-		return &request, err
+		return request, err
 	}
 
-	return &request, nil
+	return request, nil
 }
 
 func Save(response *http.Response) error {

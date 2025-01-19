@@ -12,7 +12,7 @@ import (
 )
 
 // get file contents, parse yaml, call endpoint, return raw response
-func Run(request config.RequestSchema, args map[string]string) (*http.Response, error) {
+func Run(request *config.RequestSchema, args map[string]string) (*http.Response, error) {
 	// replace args in request with values
 	requestWithArgs := compile(request, args)
 
@@ -27,7 +27,7 @@ func Run(request config.RequestSchema, args map[string]string) (*http.Response, 
 	return response, nil
 }
 
-func execute(request config.RequestSchema, args map[string]string) (*http.Response, error) {
+func execute(request *config.RequestSchema, args map[string]string) (*http.Response, error) {
 	// validate method
 	method, err := getMethod(request.Method)
 
@@ -49,7 +49,7 @@ func execute(request config.RequestSchema, args map[string]string) (*http.Respon
 	return res, err
 }
 
-func compile(request config.RequestSchema, args map[string]string) config.RequestSchema {
+func compile(request *config.RequestSchema, args map[string]string) *config.RequestSchema {
 	compiledRequest := request
 
 	// override default args with CLI args
