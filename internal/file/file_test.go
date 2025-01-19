@@ -1,26 +1,13 @@
 package file
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
 
 	"github.com/hadlow/sendex/config"
 )
-
-// func TestNewWithTemplate(t *testing.T) {
-// 	err := NewWithTemplate("tmp/test.yml", nil)
-
-// 	if err != nil {
-// 		t.Fatalf("Error creating file")
-// 	}
-
-// 	err = NewWithTemplate("tmp/test.yml", nil)
-
-// 	if err != nil {
-// 		t.Fatalf("Error creating duplicate file")
-// 	}
-// }
 
 func TestParseYaml(t *testing.T) {
 	var contents = []byte(`args:
@@ -55,6 +42,8 @@ headers:
 		t.Fatalf("Error parsing YAML")
 	}
 
+	fmt.Println(request)
+	fmt.Println(expectedRequest)
 	if !cmp.Equal(request, expectedRequest) {
 		t.Fatalf("Not parsed properly")
 	}

@@ -14,7 +14,7 @@ func TestExecute(t *testing.T) {
 
 func TestCompileId5(t *testing.T) {
 	// Test with ID 5
-	var request = config.RequestSchema{
+	var request = &config.RequestSchema{
 		Args: []map[string]string{
 			{
 				"id": "1",
@@ -29,7 +29,7 @@ func TestCompileId5(t *testing.T) {
 		},
 	}
 
-	var expectedRequestId5 = config.RequestSchema{
+	var expectedRequestId5 = &config.RequestSchema{
 		Args: []map[string]string{
 			{
 				"id": "1",
@@ -44,11 +44,7 @@ func TestCompileId5(t *testing.T) {
 		},
 	}
 
-	requestId5, err := compile(request, map[string]string{"id": "5"})
-
-	if err != nil {
-		t.Fatalf("error compiling request")
-	}
+	requestId5 := compile(request, map[string]string{"id": "5"})
 
 	if !cmp.Equal(requestId5, expectedRequestId5) {
 		t.Fatalf("requestId5 is not the same as expectedRequestId5")
@@ -56,7 +52,7 @@ func TestCompileId5(t *testing.T) {
 }
 
 func TestCompileDefaultArg(t *testing.T) {
-	var requestDefault = config.RequestSchema{
+	var requestDefault = &config.RequestSchema{
 		Args: []map[string]string{
 			{
 				"id": "1",
@@ -71,7 +67,7 @@ func TestCompileDefaultArg(t *testing.T) {
 		},
 	}
 
-	var expectedRequestId1 = config.RequestSchema{
+	var expectedRequestId1 = &config.RequestSchema{
 		Args: []map[string]string{
 			{
 				"id": "1",
@@ -86,11 +82,7 @@ func TestCompileDefaultArg(t *testing.T) {
 		},
 	}
 
-	requestId1, err := compile(requestDefault, map[string]string{"id": "5"})
-
-	if err != nil {
-		t.Fatalf("error compiling request")
-	}
+	requestId1 := compile(requestDefault, map[string]string{"id": "5"})
 
 	if !cmp.Equal(requestId1, expectedRequestId1) {
 		t.Fatalf("requestId1 is not the same as expectedRequestId5")
