@@ -14,9 +14,7 @@ var newCmd = &cobra.Command{
 	Use:   "new [FILE]",
 	Short: "Create a Sendex request file",
 	Long:  ``,
-
-	Args: cobra.MinimumNArgs(1),
-
+	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var template []byte = config.DefaultTemplate
 

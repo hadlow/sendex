@@ -39,15 +39,15 @@ func TestResponse(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewOutputConfig()
-	displayConfig.Request = &config.RequestSchema{}
+	outputConfig := NewOutputConfig()
+	outputConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Print(&response, displayConfig)
+		Print(&response, outputConfig)
 	})
 
 	if output != expectedOutput {
-		t.Fatalf("Display response output not correct")
+		t.Fatalf("Terminal output not correct")
 	}
 }
 
@@ -63,17 +63,17 @@ func TestResponseWithOnlyStatus(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewOutputConfig()
-	displayConfig.ShowBody = false
-	displayConfig.ShowHead = false
-	displayConfig.Request = &config.RequestSchema{}
+	outputConfig := NewOutputConfig()
+	outputConfig.ShowBody = false
+	outputConfig.ShowHead = false
+	outputConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Print(&response, displayConfig)
+		Print(&response, outputConfig)
 	})
 
 	if output != expectedOutput {
-		t.Fatalf("Display status output not correct")
+		t.Fatalf("Terminal output status output not correct")
 	}
 }
 
@@ -89,17 +89,17 @@ func TestResponseWithOnlyHeaders(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewOutputConfig()
-	displayConfig.ShowStatus = false
-	displayConfig.ShowBody = false
-	displayConfig.Request = &config.RequestSchema{}
+	outputConfig := NewOutputConfig()
+	outputConfig.ShowStatus = false
+	outputConfig.ShowBody = false
+	outputConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Print(&response, displayConfig)
+		Print(&response, outputConfig)
 	})
 
 	if output != expectedOutput {
-		t.Fatalf("Display headers output not correct")
+		t.Fatalf("Terminal output headers output not correct")
 	}
 }
 
@@ -116,19 +116,19 @@ func TestResponseWithWhitelistedHeaders(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewOutputConfig()
-	displayConfig.ShowBody = false
-	displayConfig.ShowStatus = false
-	displayConfig.Request = &config.RequestSchema{
+	outputConfig := NewOutputConfig()
+	outputConfig.ShowBody = false
+	outputConfig.ShowStatus = false
+	outputConfig.Request = &config.RequestSchema{
 		WhitelistHeaders: []string{"Content-Type"},
 	}
 
 	output := captureStdout(func() {
-		Print(&response, displayConfig)
+		Print(&response, outputConfig)
 	})
 
 	if output != expectedOutput {
-		t.Fatalf("Display headers output not correct")
+		t.Fatalf("Terminal output headers output not correct")
 	}
 }
 
@@ -144,16 +144,42 @@ func TestResponseWithOnlyBody(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewOutputConfig()
-	displayConfig.ShowStatus = false
-	displayConfig.ShowHead = false
-	displayConfig.Request = &config.RequestSchema{}
+	outputConfig := NewOutputConfig()
+	outputConfig.ShowStatus = false
+	outputConfig.ShowHead = false
+	outputConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Print(&response, displayConfig)
+		Print(&response, outputConfig)
 	})
 
 	if output != expectedOutput {
-		t.Fatalf("Display body output not correct")
+		t.Fatalf("Terminal output body output not correct")
+	}
+}
+
+func TestResponseOnSave(t *testing.T) {
+	expectedOutput := "200 OK\nContent-Type: application/json\n" + string(pretty.Color([]byte("{\n  \"userId\": 1\n}\n"), FileStyle)[:])
+
+	response := http.Response{
+		Status:     "200 OK",
+		StatusCode: 200,
+		Header: http.Header{
+			"Content-Type": []string{"application/json"},
+		},
+		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
+	}
+
+	outputConfig := NewOutputConfig()
+	outputConfig.Request = &config.RequestSchema{}
+
+	output, err := GenerateOutput(&response, outputConfig, true)
+
+	if err != nil {
+		t.Fatalf("Error generating raw output")
+	}
+
+	if output != expectedOutput {
+		t.Fatalf("Raw output not correct")
 	}
 }

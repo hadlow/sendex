@@ -12,9 +12,10 @@ import (
 )
 
 var saveCmd = &cobra.Command{
-	Use:   "save",
+	Use:   "save [file]",
 	Short: "Save a response to a file",
 	Long:  ``,
+	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		path := args[0]
 		argsMap, err := helpers.CreateArgsmap(args[1:])
@@ -32,11 +33,16 @@ var saveCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		// outputPath, err := cmd.Flags().GetString("output")
+		outputPath, err := cmd.Flags().GetString("output")
 
 		outputConfig := output.NewOutputConfig()
 		outputConfig.Request = &req
-		outputConfig.Path = path + ".out"
+
+		if outputPath == "" {
+			outputConfig.Path = path + ".out"
+		} else {
+			outputConfig.Path = outputPath
+		}
 
 		if s, _ := cmd.Flags().GetBool("status"); s {
 			outputConfig.ShowHead = false
@@ -60,5 +66,8 @@ var saveCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(saveCmd)
 
-	runCmd.Flags().StringP("output", "o", "", "The filepath to save the output to")
+	saveCmd.Flags().BoolP("status", "s", false, "Show only the status")
+	saveCmd.Flags().BoolP("body", "b", false, "Show only the body")
+	saveCmd.Flags().BoolP("head", "e", false, "Show only the headers")
+	saveCmd.Flags().StringP("output", "o", "", "The filepath to save the output to")
 }

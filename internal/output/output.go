@@ -76,7 +76,8 @@ func Print(response *http.Response, config *OutputConfig) error {
 		return err
 	}
 
-	if response.StatusCode >= 300 {
+	// log in terminal as error
+	if response.StatusCode >= 400 {
 		fmt.Fprintf(os.Stderr, Red+"%v\n"+Reset, errors.New(out))
 
 		return nil
