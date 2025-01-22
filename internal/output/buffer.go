@@ -34,47 +34,35 @@ type Buffer struct {
 	raw    bool // true if no styling needed
 }
 
-func (a *Buffer) Write(text string) {
-	a.buffer.WriteString(text + "\n")
+func (b *Buffer) Write(text string, style string) {
+	if b.raw {
+		b.buffer.WriteString(text + "\n")
+	} else {
+		b.buffer.WriteString(style + text + Reset + "\n")
+	}
 }
 
 func (b *Buffer) WriteInfo(text string) {
-	if b.raw {
-		b.Write(text)
-	} else {
-		b.Write(Blue + text + Reset)
-	}
+	b.Write(text, Blue)
 }
 
 func (b *Buffer) WriteSuccess(text string) {
-	if b.raw {
-		b.Write(text)
-	} else {
-		b.Write(Green + text + Reset)
-	}
+	b.Write(text, Green)
 }
 
 func (b *Buffer) WriteWarning(text string) {
-	if b.raw {
-		b.Write(text)
-	} else {
-		b.Write(Yellow + text + Reset)
-	}
+	b.Write(text, Yellow)
 }
 
 func (b *Buffer) WriteError(text string) {
-	if b.raw {
-		b.Write(text)
-	} else {
-		b.Write(Red + text + Reset)
-	}
+	b.Write(text, Red)
 }
 
 func (b *Buffer) HeaderItem(header string, value []string) {
 	if b.raw {
-		b.Write(header + ": " + strings.Join(value, ", "))
+		b.buffer.WriteString(header + ": " + strings.Join(value, ", ") + "\n")
 	} else {
-		b.Write(Cyan + header + Reset + ": " + strings.Join(value, ", "))
+		b.buffer.WriteString(Cyan + header + Reset + ": " + strings.Join(value, ", ") + "\n")
 	}
 }
 
@@ -117,8 +105,15 @@ func (b *Buffer) Body(response *http.Response) error {
 		return err
 	}
 
-	prettyJSON := pretty.Color([]byte(body), FileStyle)
-	b.Write(string(prettyJSON[:]))
+	var prettyJSON []byte
+
+	if b.raw {
+		prettyJSON = pretty.Color([]byte(body), FileStyle)
+	} else {
+		prettyJSON = pretty.Color([]byte(body), nil)
+	}
+
+	b.buffer.WriteString(string(prettyJSON[:]) + "\n")
 
 	return nil
 }
