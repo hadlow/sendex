@@ -39,11 +39,11 @@ func TestResponse(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewDisplayConfig(true, true, true)
+	displayConfig := NewOutputConfig()
 	displayConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Response(&response, displayConfig)
+		Print(&response, displayConfig)
 	})
 
 	if output != expectedOutput {
@@ -63,11 +63,13 @@ func TestResponseWithOnlyStatus(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewDisplayConfig(true, false, false)
+	displayConfig := NewOutputConfig()
+	displayConfig.ShowBody = false
+	displayConfig.ShowHead = false
 	displayConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Response(&response, displayConfig)
+		Print(&response, displayConfig)
 	})
 
 	if output != expectedOutput {
@@ -87,11 +89,13 @@ func TestResponseWithOnlyHeaders(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewDisplayConfig(false, true, false)
+	displayConfig := NewOutputConfig()
+	displayConfig.ShowStatus = false
+	displayConfig.ShowBody = false
 	displayConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Response(&response, displayConfig)
+		Print(&response, displayConfig)
 	})
 
 	if output != expectedOutput {
@@ -112,13 +116,15 @@ func TestResponseWithWhitelistedHeaders(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewDisplayConfig(false, true, false)
+	displayConfig := NewOutputConfig()
+	displayConfig.ShowBody = false
+	displayConfig.ShowStatus = false
 	displayConfig.Request = &config.RequestSchema{
 		WhitelistHeaders: []string{"Content-Type"},
 	}
 
 	output := captureStdout(func() {
-		Response(&response, displayConfig)
+		Print(&response, displayConfig)
 	})
 
 	if output != expectedOutput {
@@ -138,11 +144,13 @@ func TestResponseWithOnlyBody(t *testing.T) {
 		Body: io.NopCloser(bytes.NewBufferString("{\n  \"userId\": 1\n}")),
 	}
 
-	displayConfig := NewDisplayConfig(false, false, true)
+	displayConfig := NewOutputConfig()
+	displayConfig.ShowStatus = false
+	displayConfig.ShowHead = false
 	displayConfig.Request = &config.RequestSchema{}
 
 	output := captureStdout(func() {
-		Response(&response, displayConfig)
+		Print(&response, displayConfig)
 	})
 
 	if output != expectedOutput {
