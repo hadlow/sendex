@@ -5,9 +5,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/hadlow/sendex/internal/display"
 	"github.com/hadlow/sendex/internal/file"
 	"github.com/hadlow/sendex/internal/helpers"
+	"github.com/hadlow/sendex/internal/output"
 	"github.com/hadlow/sendex/internal/request"
 )
 
@@ -16,9 +16,7 @@ var runCmd = &cobra.Command{
 	Use:   "run [FILE]",
 	Short: "Run a request file",
 	Long:  ``,
-
-	Args: cobra.MinimumNArgs(1),
-
+	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		path := args[0]
 		argsMap, err := helpers.CreateArgsmap(args[1:])
@@ -36,25 +34,25 @@ var runCmd = &cobra.Command{
 			os.Exit(1)
 		}
 
-		displayConfig := display.NewDisplayConfig(true, true, true)
-		displayConfig.Request = &req
+		outputConfig := output.NewOutputConfig()
+		outputConfig.Request = &req
 
 		if s, _ := cmd.Flags().GetBool("status"); s {
-			displayConfig.ShowHead = false
-			displayConfig.ShowBody = false
+			outputConfig.ShowHead = false
+			outputConfig.ShowBody = false
 		}
 
 		if s, _ := cmd.Flags().GetBool("body"); s {
-			displayConfig.ShowStatus = false
-			displayConfig.ShowHead = false
+			outputConfig.ShowStatus = false
+			outputConfig.ShowHead = false
 		}
 
 		if s, _ := cmd.Flags().GetBool("head"); s {
-			displayConfig.ShowStatus = false
-			displayConfig.ShowBody = false
+			outputConfig.ShowStatus = false
+			outputConfig.ShowBody = false
 		}
 
-		display.Response(response, displayConfig)
+		output.Print(response, outputConfig)
 	},
 }
 

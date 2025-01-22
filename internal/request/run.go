@@ -7,8 +7,8 @@ import (
 	"strings"
 
 	"github.com/hadlow/sendex/config"
-	"github.com/hadlow/sendex/internal/display"
 	"github.com/hadlow/sendex/internal/helpers"
+	"github.com/hadlow/sendex/internal/output"
 )
 
 // get file contents, parse yaml, call endpoint, return raw response
@@ -20,7 +20,7 @@ func Run(request *config.RequestSchema, args map[string]string) (*http.Response,
 	response, err := execute(requestWithArgs, args)
 
 	if err != nil {
-		display.Error(err)
+		output.Error(err)
 		return nil, fmt.Errorf("error calling endpoint")
 	}
 

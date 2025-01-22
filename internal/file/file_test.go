@@ -1,7 +1,6 @@
 package file
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -42,8 +41,6 @@ headers:
 		t.Fatalf("Error parsing YAML")
 	}
 
-	fmt.Println(request)
-	fmt.Println(expectedRequest)
 	if !cmp.Equal(request, expectedRequest) {
 		t.Fatalf("Not parsed properly")
 	}

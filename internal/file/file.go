@@ -8,7 +8,7 @@ import (
 	"gopkg.in/yaml.v3"
 
 	"github.com/hadlow/sendex/config"
-	"github.com/hadlow/sendex/internal/display"
+	"github.com/hadlow/sendex/internal/output"
 )
 
 func Get(path string) (config.RequestSchema, error) {
@@ -16,7 +16,7 @@ func Get(path string) (config.RequestSchema, error) {
 	contents, err := os.ReadFile(path)
 
 	if err != nil {
-		display.Error(err)
+		output.Error(err)
 		return config.RequestSchema{}, fmt.Errorf("error reading file")
 	}
 
@@ -24,7 +24,7 @@ func Get(path string) (config.RequestSchema, error) {
 	request, err := ParseYaml(contents)
 
 	if err != nil {
-		display.Error(err)
+		output.Error(err)
 		return config.RequestSchema{}, fmt.Errorf("error parsing YAML")
 	}
 

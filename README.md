@@ -35,9 +35,13 @@ Coming soon
 
 `sendex save requests/get-blog.yml`
 
-### Save response and specify output file path
+### Optionally save response and specify output file path
 
 `sendex save requests/get-blog.yml --output=responses/get-blog.txt`
+
+### Args also work on save
+
+`sendex save requests/get-blog.yml id=4371 --output=responses/get-blog.txt`
 
 ### Example config file
 
