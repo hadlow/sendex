@@ -47,14 +47,20 @@ changelog:
       - "^docs:"
       - "^test:"
 
-brews:
-  - name: sendex
-    tap:
-      owner: hadlow
-      name: homebrew-sendex
-    homepage: "https://github.com/hadlow/sendex"
-    description: "A lightweight, file-based tool to make requests to your API"
-    install: |
-      bin.install "my-go-app"
-    test: |
-      system "#{bin}/my-go-app --version"
+# repository:
+#   owner: hadlow
+#   name: homebrew-sendex
+#   branch: main
+#   token: "{{ .Env.PUBLISH_AUTH_TOKEN }}"
+
+# brews:
+#   - name: sendex
+#     tap:
+#       owner: hadlow
+#       name: homebrew-sendex
+#     homepage: "https://github.com/hadlow/sendex"
+#     description: "A lightweight, file-based tool to make requests to your API"
+#     install: |
+#       bin.install "my-go-app"
+#     test: |
+#       system "#{bin}/my-go-app --version"
