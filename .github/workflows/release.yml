@@ -18,4 +18,4 @@ jobs:
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
         env:
-          GITHUB_TOKEN: ${{ secrets.SENDEX_RELEASE_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

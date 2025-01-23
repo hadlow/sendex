@@ -27,4 +27,4 @@ jobs:
           version: ${{ env.GITHUB_REF_NAME }}
           args: release --rm-dist
         env:
-          GITHUB_TOKEN: ${{ secrets.SENDEX_RELEASE_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
