@@ -1,11 +1,3 @@
-# This is an example .goreleaser.yml file with some sensible defaults.
-# Make sure to check the documentation at https://goreleaser.com
-
-# The lines below are called `modelines`. See `:help modeline`
-# Feel free to remove those if you don't want/need to use them.
-# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
-# vim: set ts=2 sw=2 tw=0 fo=cnqoj
-
 version: 2
 
 project_name: sendex
@@ -46,21 +38,29 @@ changelog:
     exclude:
       - "^docs:"
       - "^test:"
+brews:
+  -
+    name: sendex
 
-# repository:
-#   owner: hadlow
-#   name: homebrew-sendex
-#   branch: main
-#   token: "{{ .Env.PUBLISH_AUTH_TOKEN }}"
+    # Git author used to commit to the repository.
+    commit_author:
+      name: hadlow
+      email: me@billyhadlow.com
 
-# brews:
-#   - name: sendex
-#     tap:
-#       owner: hadlow
-#       name: homebrew-sendex
-#     homepage: "https://github.com/hadlow/sendex"
-#     description: "A lightweight, file-based tool to make requests to your API"
-#     install: |
-#       bin.install "my-go-app"
-#     test: |
-#       system "#{bin}/my-go-app --version"
+    commit_msg_template: "Brew formula update for {{ .ProjectName }} version {{ .Tag }}"
+    # Directory inside the repository to put the formula.
+    directory: Formula
+    description: "A lightweight API endpoint testing tool."
+    license: "MIT"
+
+    install: |
+      bin.install "sendex"
+    test: |
+      system "#{bin}/sendex --version"
+
+    # Repository to push the generated files to.
+    repository:
+      owner: hadlow
+      name: homebrew-sendex
+      branch: main
+      token: "{{ .Env.GITHUB_TOKEN }}"
