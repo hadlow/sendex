@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/hadlow/sendex/compare/v1.1.0...v1.1.1) (2025-01-29)
+
+
+### Bug Fixes
+
+* homebrew publish ([#8](https://github.com/hadlow/sendex/issues/8)) ([3b57683](https://github.com/hadlow/sendex/commit/3b57683f3a3ada3809fba77927c31ce5162c04b6))
+
 # [1.1.0](https://github.com/hadlow/sendex/compare/v1.0.0...v1.1.0) (2025-01-29)
 
 
