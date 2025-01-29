@@ -171,9 +171,10 @@ func TestResponseOnSave(t *testing.T) {
 	}
 
 	outputConfig := NewOutputConfig()
+	outputConfig.Raw = true
 	outputConfig.Request = &config.RequestSchema{}
 
-	output, err := GenerateOutput(&response, outputConfig, true)
+	output, err := GenerateOutput(&response, outputConfig)
 
 	if err != nil {
 		t.Fatalf("Error generating raw output")
