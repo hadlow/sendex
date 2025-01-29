@@ -12,6 +12,7 @@ import (
 type OutputConfig struct {
 	Request    *config.RequestSchema
 	Path       string
+	Raw        bool
 	ShowStatus bool
 	ShowHead   bool
 	ShowBody   bool
@@ -22,6 +23,7 @@ func NewOutputConfig() *OutputConfig {
 		ShowStatus: true,
 		ShowHead:   true,
 		ShowBody:   true,
+		Raw:        false,
 	}
 
 	return &c
@@ -43,9 +45,9 @@ func Error(err error) {
 	fmt.Fprintf(os.Stderr, Red+"%v\n"+Reset, err)
 }
 
-func GenerateOutput(response *http.Response, config *OutputConfig, raw bool) (string, error) {
+func GenerateOutput(response *http.Response, config *OutputConfig) (string, error) {
 	buff := Buffer{
-		raw: raw,
+		raw: config.Raw,
 	}
 
 	if config.ShowStatus {
@@ -70,7 +72,7 @@ func GenerateOutput(response *http.Response, config *OutputConfig, raw bool) (st
 }
 
 func Print(response *http.Response, config *OutputConfig) error {
-	out, err := GenerateOutput(response, config, false)
+	out, err := GenerateOutput(response, config)
 
 	if err != nil {
 		return err
@@ -89,7 +91,7 @@ func Print(response *http.Response, config *OutputConfig) error {
 }
 
 func Save(response *http.Response, config *OutputConfig) error {
-	out, err := GenerateOutput(response, config, true)
+	out, err := GenerateOutput(response, config)
 
 	if err != nil {
 		return err
