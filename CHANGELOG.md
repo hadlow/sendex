@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/hadlow/sendex/compare/v1.0.0...v1.1.0) (2025-01-29)
+
+
+### Features
+
+* add raw output option for e2e testing ([#7](https://github.com/hadlow/sendex/issues/7)) ([ae385d7](https://github.com/hadlow/sendex/commit/ae385d79b34c78af35c41cd07c123e7c6d249754))
+
 # 1.0.0 (2025-01-23)
 
 
