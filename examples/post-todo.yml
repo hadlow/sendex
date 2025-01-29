@@ -1,11 +1,15 @@
-method: POST
-endpoint: http://jsonplaceholder.typicode.com/todos
-headers:
-  - Content-Type: application/json
-  - Accept: application/json
+args:
+  - id: 1 # specify 1 as default value
+method: PoSt
+endpoint: https://jsonplaceholder.typicode.com/todos
 body: |
   {
-    "userId": 1,
+    "userId": {id},
     "title": "delectus aut autem",
     "completed": false
   }
+headers:
+  - Content-Type: application/json
+  - Accept: application/json
+whitelist-headers:
+  - Nil

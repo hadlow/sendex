@@ -37,6 +37,7 @@ var saveCmd = &cobra.Command{
 
 		outputConfig := output.NewOutputConfig()
 		outputConfig.Request = &req
+		outputConfig.Raw = true
 
 		if outputPath == "" {
 			outputConfig.Path = path + ".out"

@@ -37,6 +37,11 @@ var runCmd = &cobra.Command{
 		outputConfig := output.NewOutputConfig()
 		outputConfig.Request = &req
 
+		// if we don't want syntax highlighting on output
+		if r, _ := cmd.Flags().GetBool("raw"); r {
+			outputConfig.Raw = true
+		}
+
 		if s, _ := cmd.Flags().GetBool("status"); s {
 			outputConfig.ShowHead = false
 			outputConfig.ShowBody = false
@@ -62,4 +67,5 @@ func init() {
 	runCmd.Flags().BoolP("status", "s", false, "Show only the status")
 	runCmd.Flags().BoolP("body", "b", false, "Show only the body")
 	runCmd.Flags().BoolP("head", "e", false, "Show only the headers")
+	runCmd.Flags().BoolP("raw", "r", false, "Display with no syntax highlighting on output")
 }
