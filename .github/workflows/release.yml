@@ -1,11 +1,10 @@
-name: release
+name: "Release"
 
 on:
   workflow_run:
-    workflows: ["build-test"]
+    workflows: ["Test and build"]
     types:
       - completed
-  push:
     branches:
       - main
 
