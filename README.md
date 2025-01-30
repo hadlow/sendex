@@ -1,8 +1,10 @@
-<h1 align="center">
+<div align="center">
   <a href="https://sendex.dev"><img src="/logo.svg" /></a>
-</h1>
+</div>
 
 <h4 align="center">Sendex is a lightweight, file-based tool to make requests to your API</h4>
+
+<div align="center"><img src="https://github.com/hadlow/sendex/actions/workflows/release.yml/badge.svg?branch=main" /> <img src="https://github.com/hadlow/sendex/actions/workflows/build-test.yml/badge.svg?branch=main" /></div>
 
 <h4 align="center"><a href="https://sendex.dev">Go to full documentation</a></h4>
 
