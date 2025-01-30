@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/hadlow/sendex/compare/v1.1.1...v1.1.2) (2025-01-30)
+
+
+### Bug Fixes
+
+* fix double release action ([#9](https://github.com/hadlow/sendex/issues/9)) ([6000354](https://github.com/hadlow/sendex/commit/6000354a2b0da90ad714036a8243b0af7ac2745a))
+* release not added ([e4bf5fa](https://github.com/hadlow/sendex/commit/e4bf5fab0603065a8561b5755290fd5ba71204d7))
+
 ## [1.1.1](https://github.com/hadlow/sendex/compare/v1.1.0...v1.1.1) (2025-01-29)
 
 
