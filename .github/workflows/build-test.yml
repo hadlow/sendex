@@ -18,7 +18,10 @@ jobs:
         go-version: 1.23
 
     - name: Build
-      run: go build -v ./...
+      run: make build
 
-    - name: Test
+    - name: Unit tests
       run: go test -v ./...
+
+    - name: E2E tests
+      run: sh ./tests/e2e-tests.sh
