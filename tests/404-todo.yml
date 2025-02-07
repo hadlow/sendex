@@ -1,0 +1,7 @@
+method: GET
+endpoint: http://jsonplaceholder.typicode.com/todos/sdf
+headers:
+  - Content-Type: application/json
+  - Accept: application/json
+whitelist-headers:
+  - Content-Type
