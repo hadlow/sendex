@@ -1,0 +1,13 @@
+method: POST
+endpoint: http://jsonplaceholder.typicode.com/todos # we can use 'id' here
+headers:
+  - Content-Type: application/json
+  - Accept: application/json
+whitelist-headers:
+  - Content-Type
+body: |
+  {
+    "userId": 222,
+    "title": "posted here",
+    "completed": true
+  }

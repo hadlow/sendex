@@ -8,6 +8,10 @@
 
 <h4 align="center"><a href="https://sendex.dev">Go to full documentation</a></h4>
 
+<div>
+  <img src="/demo.gif" />
+</div>
+
 ## Contents
 
 - [Key Features](#key-features)
