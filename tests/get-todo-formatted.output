@@ -1,0 +1,8 @@
+[33m200 OK[0m
+[36mContent-Type[0m: application/json; charset=utf-8
+[1m{[0m
+  [1m[94m"userId"[0m[1m:[0m [33m1[0m[1m,[0m
+  [1m[94m"id"[0m[1m:[0m [33m1[0m[1m,[0m
+  [1m[94m"title"[0m[1m:[0m [32m"delectus aut autem"[0m[1m,[0m
+  [1m[94m"completed"[0m[1m:[0m [36mfalse[0m
+[1m}[0m
