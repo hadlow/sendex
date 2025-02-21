@@ -11,5 +11,5 @@ body: |
 headers:
   - Content-Type: application/json
   - Accept: application/json
-whitelist-headers:
+allow-headers:
   - Nil

@@ -55,7 +55,7 @@ func GenerateOutput(response *http.Response, config *OutputConfig) (string, erro
 	}
 
 	if config.ShowHead {
-		err := buff.Head(response, config.Request.WhitelistHeaders)
+		err := buff.Head(response, config.Request.AllowHeaders)
 		if err != nil {
 			return "", err
 		}
