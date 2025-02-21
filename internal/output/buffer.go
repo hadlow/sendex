@@ -88,9 +88,9 @@ func (b *Buffer) Status(response *http.Response) {
 	}
 }
 
-func (b *Buffer) Head(response *http.Response, whitelistHeaders []string) error {
+func (b *Buffer) Head(response *http.Response, AllowHeaders []string) error {
 	for header, value := range response.Header {
-		if len(whitelistHeaders) == 0 || slices.Contains(whitelistHeaders, header) {
+		if len(AllowHeaders) == 0 || slices.Contains(AllowHeaders, header) {
 			b.HeaderItem(header, value)
 		}
 	}

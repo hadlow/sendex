@@ -3,5 +3,5 @@ endpoint: http://jsonplaceholder.typicode.com/todos/sdf
 headers:
   - Content-Type: application/json
   - Accept: application/json
-whitelist-headers:
+allow-headers:
   - Content-Type

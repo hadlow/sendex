@@ -103,7 +103,7 @@ func TestResponseWithOnlyHeaders(t *testing.T) {
 	}
 }
 
-func TestResponseWithWhitelistedHeaders(t *testing.T) {
+func TestResponseWithAllowedHeaders(t *testing.T) {
 	expectedOutput := Cyan + "Content-Type" + Reset + ": application/json\n"
 
 	response := http.Response{
@@ -120,7 +120,7 @@ func TestResponseWithWhitelistedHeaders(t *testing.T) {
 	outputConfig.ShowBody = false
 	outputConfig.ShowStatus = false
 	outputConfig.Request = &config.RequestSchema{
-		WhitelistHeaders: []string{"Content-Type"},
+		AllowHeaders: []string{"Content-Type"},
 	}
 
 	output := captureStdout(func() {

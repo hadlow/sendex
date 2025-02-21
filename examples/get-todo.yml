@@ -6,5 +6,5 @@ endpoint: http://jsonplaceholder.typicode.com/todos/{id} # we can use 'id' here
 headers:
   - Content-Type: application/json
   - Accept: application/json
-whitelist-headers:
+allow-headers:
   - Content-Type

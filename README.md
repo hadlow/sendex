@@ -73,18 +73,17 @@ endpoint: http://localhost:8000/blog/{id} # we can use 'id' here
 headers:
   - Content-Type: application/json
   - Accept: application/json
-whitelist-headers:
+allow-headers:
   - Content-Type
-  - Accept
 ```
 
 > [Click here](/learn-more/request-configuration) for full explanation of all parameters that can be used.
 
 - The args parameter allows us to pass in command line arguments. Formatted like `id=2`
-- Method can be any HTTP method
-- Endpoint is the API URL
-- Headers must be used in list format
-- Whitelist headers keeps the output clean, but only showing the headers listed
+- `method` can be any HTTP method
+- `endpoint` is the API URL
+- `headers` must be used in list format
+- `allow-headers` keeps the output clean, but only showing the headers listed
 
 If you're just trying out Sendex, feel free to use a test API, such as [JSON Placeholder](https://jsonplaceholder.typicode.com). Replace the default endpoint with `https://jsonplaceholder.typicode.com/todos/{id}`.
 
