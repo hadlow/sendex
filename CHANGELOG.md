@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/hadlow/sendex/compare/v1.1.2...v1.2.0) (2025-02-21)
+
+
+### Features
+
+* rename whitelist-headers to allow-headers ([#11](https://github.com/hadlow/sendex/issues/11)) ([d79018f](https://github.com/hadlow/sendex/commit/d79018f488156491f1973252c58b2e9c73c4e3b5))
+
 ## [1.1.2](https://github.com/hadlow/sendex/compare/v1.1.1...v1.1.2) (2025-01-30)
 
 
