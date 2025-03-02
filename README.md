@@ -46,7 +46,6 @@ Test installation by running:
 sendex help
 ```
 
-> **Note**
 > Currently only tested for MacOS
 
 ## Basic Usage
@@ -77,7 +76,7 @@ allow-headers:
   - Content-Type
 ```
 
-> [Click here](/learn-more/request-configuration) for full explanation of all parameters that can be used.
+> [Click here](https://sendex.dev/learn-more/request-configuration) for full explanation of all parameters that can be used.
 
 - The args parameter allows us to pass in command line arguments. Formatted like `id=2`
 - `method` can be any HTTP method
