@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/hadlow/sendex/compare/v1.2.0...v1.2.1) (2025-03-02)
+
+
+### Bug Fixes
+
+* readme link fix ([#12](https://github.com/hadlow/sendex/issues/12)) ([9e5c7a6](https://github.com/hadlow/sendex/commit/9e5c7a600c0a81322b7c814ae4f5d4f05adcb060))
+
 # [1.2.0](https://github.com/hadlow/sendex/compare/v1.1.2...v1.2.0) (2025-02-21)
 
 
