@@ -17,18 +17,6 @@ var Blue = "\033[34m"
 var Magenta = "\033[35m"
 var Cyan = "\033[36m"
 
-// clear styling on files as it shows as raw chars
-var FileStyle = &pretty.Style{
-	Key:      [2]string{"", ""},
-	String:   [2]string{"", ""},
-	Number:   [2]string{"", ""},
-	True:     [2]string{"", ""},
-	False:    [2]string{"", ""},
-	Null:     [2]string{"", ""},
-	Escape:   [2]string{"", ""},
-	Brackets: [2]string{"", ""},
-}
-
 type Buffer struct {
 	buffer strings.Builder
 	raw    bool // true if no styling needed
@@ -108,12 +96,12 @@ func (b *Buffer) Body(response *http.Response) error {
 	var prettyJSON []byte
 
 	if b.raw {
-		prettyJSON = pretty.Color([]byte(body), FileStyle)
+		prettyJSON = pretty.Pretty([]byte(body))
 	} else {
-		prettyJSON = pretty.Color([]byte(body), nil)
+		prettyJSON = pretty.Color(pretty.Pretty([]byte(body)), nil)
 	}
 
-	b.buffer.WriteString(string(prettyJSON[:]) + "\n")
+	b.buffer.WriteString(string(prettyJSON[:]))
 
 	return nil
 }

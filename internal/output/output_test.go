@@ -159,7 +159,7 @@ func TestResponseWithOnlyBody(t *testing.T) {
 }
 
 func TestResponseOnSave(t *testing.T) {
-	expectedOutput := "200 OK\nContent-Type: application/json\n" + string(pretty.Color([]byte("{\n  \"userId\": 1\n}\n"), FileStyle)[:])
+	expectedOutput := "200 OK\nContent-Type: application/json\n" + string(pretty.Pretty([]byte("{\n  \"userId\": 1\n}\n"))[:])
 
 	response := http.Response{
 		Status:     "200 OK",
