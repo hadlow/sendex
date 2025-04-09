@@ -8,6 +8,6 @@ allow-headers:
   - Content-Type
 body: |
   {
-    "prompt": "Hello, world!",
+    "prompt": "{prompt}",
     "schema": ""
   }

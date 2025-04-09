@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/hadlow/sendex/config"
 )
@@ -62,9 +63,16 @@ func GenerateOutput(response *http.Response, config *OutputConfig) (string, erro
 	}
 
 	if config.ShowBody {
-		err := buff.Body(response)
-		if err != nil {
-			return "", err
+		if strings.Contains(response.Header.Get("Content-Type"), "json") {
+			err := buff.JsonBody(response)
+			if err != nil {
+				return "", err
+			}
+		} else {
+			err := buff.TextBody(response)
+			if err != nil {
+				return "", err
+			}
 		}
 	}
 

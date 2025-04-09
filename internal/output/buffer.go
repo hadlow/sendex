@@ -86,7 +86,19 @@ func (b *Buffer) Head(response *http.Response, AllowHeaders []string) error {
 	return nil
 }
 
-func (b *Buffer) Body(response *http.Response) error {
+func (b *Buffer) TextBody(response *http.Response) error {
+	body, err := io.ReadAll(response.Body)
+
+	if err != nil {
+		return err
+	}
+
+	b.buffer.WriteString(string(body))
+
+	return nil
+}
+
+func (b *Buffer) JsonBody(response *http.Response) error {
 	body, err := io.ReadAll(response.Body)
 
 	if err != nil {
