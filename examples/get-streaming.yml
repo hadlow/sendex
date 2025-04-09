@@ -1,0 +1,13 @@
+args:
+  - prompt: "Hello, world!"
+method: POST
+endpoint: http://localhost:8000/prompt
+headers:
+  - Content-Type: text/event-stream
+allow-headers:
+  - Content-Type
+body: |
+  {
+    "prompt": "Hello, world!",
+    "schema": ""
+  }
