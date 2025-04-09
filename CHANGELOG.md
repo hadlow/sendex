@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/hadlow/sendex/compare/v1.2.2...v1.2.3) (2025-04-09)
+
+
+### Bug Fixes
+
+* handle non-json requests ([#14](https://github.com/hadlow/sendex/issues/14)) ([b7fdeb3](https://github.com/hadlow/sendex/commit/b7fdeb3cbc99d92512fb6953d96bb471f24d8af9))
+
 ## [1.2.2](https://github.com/hadlow/sendex/compare/v1.2.1...v1.2.2) (2025-04-09)
 
 
