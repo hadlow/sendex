@@ -3,11 +3,12 @@ args:
 method: POST
 endpoint: http://localhost:8000/prompt
 headers:
-  - Content-Type: text/event-stream
+  - Content-Type: application/json
+  - Accept: application/json
 allow-headers:
   - Content-Type
 body: |
   {
-    "prompt": "Hello, world!",
+    "prompt": "{prompt}",
     "schema": ""
   }

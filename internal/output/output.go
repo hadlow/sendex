@@ -62,9 +62,16 @@ func GenerateOutput(response *http.Response, config *OutputConfig) (string, erro
 	}
 
 	if config.ShowBody {
-		err := buff.Body(response)
-		if err != nil {
-			return "", err
+		if response.Header.Get("Content-Type") == "application/json" {
+			err := buff.JsonBody(response)
+			if err != nil {
+				return "", err
+			}
+		} else {
+			err := buff.TextBody(response)
+			if err != nil {
+				return "", err
+			}
 		}
 	}
 
