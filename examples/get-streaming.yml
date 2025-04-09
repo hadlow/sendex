@@ -3,8 +3,7 @@ args:
 method: POST
 endpoint: http://localhost:8000/prompt
 headers:
-  - Content-Type: application/json
-  - Accept: application/json
+  - Content-Type: text/event-stream
 allow-headers:
   - Content-Type
 body: |

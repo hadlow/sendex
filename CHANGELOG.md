@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/hadlow/sendex/compare/v1.2.1...v1.2.2) (2025-04-09)
+
+
+### Bug Fixes
+
+* json rendering issue ([#13](https://github.com/hadlow/sendex/issues/13)) ([dcd6b90](https://github.com/hadlow/sendex/commit/dcd6b90daf4a567f3835ddd76bd17b7166811200))
+
 ## [1.2.1](https://github.com/hadlow/sendex/compare/v1.2.0...v1.2.1) (2025-03-02)
 
 
