@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/hadlow/sendex/config"
@@ -54,6 +55,11 @@ func compile(request *config.RequestSchema, args map[string]string) *config.Requ
 
 	// override default args with CLI args
 	finalArgs := helpers.FlattenMaps(request.Args)
+
+	for _, e := range os.Environ() {
+		pair := strings.SplitN(e, "=", 2)
+		finalArgs["env."+pair[0]] = pair[1]
+	}
 
 	for key, value := range args {
 		if _, exists := finalArgs[key]; exists {

@@ -1,0 +1,9 @@
+args:
+  - id: 1
+method: GET
+endpoint: http://jsonplaceholder.typicode.com/todos/{env.SENDEX_TOKEN}
+headers:
+  - Content-Type: application/json
+  - Accept: application/json
+allow-headers:
+  - Content-Type
