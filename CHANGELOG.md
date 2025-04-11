@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/hadlow/sendex/compare/v1.2.3...v1.3.0) (2025-04-11)
+
+
+### Features
+
+* env vars can now be accessed in config files ([#15](https://github.com/hadlow/sendex/issues/15)) ([b146389](https://github.com/hadlow/sendex/commit/b146389003ba1ddac03b4a9348e92bf3d8bf54bf))
+
 ## [1.2.3](https://github.com/hadlow/sendex/compare/v1.2.2...v1.2.3) (2025-04-09)
 
 
