@@ -65,3 +65,14 @@ else
     echo "FAIL: get-todo-formatted does not match output"
     exit 1
 fi
+
+# GET with env vars
+output_7=$(./bin/sendex run tests/get-todo-env.yml --raw)
+desired_output_7=$(cat tests/get-todo-2.output)
+
+if [ "$output_7" = "$desired_output_7" ]; then
+    echo "PASS: get-todo-env matches expected output"
+else
+    echo "FAIL: get-todo-env does not match output"
+    exit 1
+fi

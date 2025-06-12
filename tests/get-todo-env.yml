@@ -1,0 +1,7 @@
+method: GET
+endpoint: http://jsonplaceholder.typicode.com/todos/{env.TODO_ID}
+headers:
+  - Content-Type: application/json
+  - Accept: application/json
+allow-headers:
+  - Content-Type
