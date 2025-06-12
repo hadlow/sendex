@@ -24,4 +24,6 @@ jobs:
       run: make build
 
     - name: E2E tests
+      env:
+        TODO_ID: 2
       run: sh ./tests/e2e-tests.sh
