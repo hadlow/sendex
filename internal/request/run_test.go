@@ -89,6 +89,46 @@ func TestCompileDefaultArg(t *testing.T) {
 	}
 }
 
+func TestCompileWithEnv(t *testing.T) {
+	t.Setenv("SOME_ID", "7")
+
+	var requestDefault = &config.RequestSchema{
+		Args: []map[string]string{
+			{
+				"id": "1",
+			},
+		},
+		Method:   "GET",
+		Endpoint: "http://jsonplaceholder.typicode.com/todos/{env.SOME_ID}",
+		Headers: []map[string]string{
+			{
+				"TestId": "{id}",
+			},
+		},
+	}
+
+	var expectedRequestId1 = &config.RequestSchema{
+		Args: []map[string]string{
+			{
+				"id": "1",
+			},
+		},
+		Method:   "GET",
+		Endpoint: "http://jsonplaceholder.typicode.com/todos/7",
+		Headers: []map[string]string{
+			{
+				"TestId": "5",
+			},
+		},
+	}
+
+	requestId1 := compile(requestDefault, map[string]string{"id": "5"})
+
+	if !cmp.Equal(requestId1, expectedRequestId1) {
+		t.Fatalf("requestId1 is not the same as expectedRequestId5")
+	}
+}
+
 func TestGetMethod(t *testing.T) {
 	// get
 	if m, _ := getMethod("get"); m != http.MethodGet {
